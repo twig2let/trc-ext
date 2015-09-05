@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+  "name": "TRC Extension",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["*://www.yammer.com/*"],
+      "js":[
+        "jquery-2.1.4.min.js",
+        "underscore-1.8.3.min.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
