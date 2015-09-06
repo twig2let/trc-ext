@@ -88,10 +88,6 @@
         }
     }
 
-    function insertAt(src, index, str) {
-        return src.substr(0, index) + str + src.substr(index)
-    }
-
     //--------- FOR DEVELOPMENT ONLY ----------
     if (!_.isEqual(location.hostname, 'www.yammer.com')) {
         addListener();
