@@ -10,85 +10,91 @@
 
     $('body').append("<style>.match {text-decoration:underline;color:#bfd730;cursor:pointer;}</style>");
 
-    var abbrs = /(br|bu)?(rpi|dvi|wvi|sma|db|iw|pb|dma|ath|hfig|fig)/ig;
+    var abbrs = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|pb|pl|poa|pp|pt|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
+
     var abbrsLookup = {
         prefix: {
             bu: 'Bullish',
             br: 'Bearish'
         },
-        '1R': '– Target is 100% of Risk (distance from entry to stop)',
-        ABS: 'Advanced Breakout System',
-        AE: 'Alternative Entry',
-        BaC: 'Break and Close',
-        BD: 'Break Down',
-        BE: 'Break Even',
-        BO: 'B/o – Break Out',
-        BoB: 'Break Out Bar',
-        BoBCAT: 'Break Out Bar Category (e.g 4 BoBCats)',
-        BrE: 'Bearish Engulfing',
-        BrF: 'Bearish Flag',
-        BrRPI: 'Bearish RPI',
-        BuE: 'Bullish Engulfing',
-        BuF: 'Bullish Flag',
-        BuRPI: 'Bullish RPI',
-        BW: 'Bollinger Bandwidth',
-        BZ: 'Buy Zone',
-        C4H: 'C4L – Cat 4 High or Cat 4 Low',
-        CAT: 'Category (e.g Cat 4)',
-        CoE: 'Confluence of Events',
-        CT: 'Channel Tunnel',
-        CTS: 'Collapsible Trailing Stop',
-        DB: 'Double Bottom',
-        DD: 'Double Deviation',
-        DnT: 'Do Not Trade',
-        DMA: 'Dual Moving Average',
-        DT: 'Double Top',
-        DVI: 'Daily Value Index',
-        EA: 'Entry Advantage',
-        EMMA: 'Exponential Multiple <Mving Average',
-        ESLT: 'Entry Stop Loss Technique',
-        EW: 'Elliott Waves',
-        FACTS: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
-        FT: 'Free Trade',
-        GO: 'Gator Oscillator',
-        'HH/LL': 'Highest High / Lowest Low (Donchian levels)',
-        IB: 'Initial Breakout',
-        IW: 'Impulse Wave',
-        LHF: 'Low Hanging Fruit',
-        LT: 'Long Term',
-        MT: 'Medium Term',
-        OO: 'Obvious Opportunity: ',
-        'P&P': 'Price and Personaility',
-        PB: 'P/b – Pullback',
-        PL: 'P/L – Pink Line',
-        PoA: 'Plan of Action',
-        PP: 'Personal Preference',
-        PT: 'Pilot Trade',
-        PuB: 'Pullback Bar',
-        RBO: 'Range Break Out',
-        RBOA: 'Range Breakout Advanced',
-        RC: 'Reversal Candle',
-        RN: 'Round Number',
-        RF: 'Risk Free',
-        RPI: 'Range Percentage Indicator',
-        RR: 'R Ratio',
-        RST: 'Resistance, Support and Trendline',
-        RTC: 'Regression Trend Channel',
-        RZ: 'Range Zone',
-        SD: 'Standard Deviation',
-        ST: 'Short Term',
-        STEP: 'Stop to Entry Point',
-        SZ: 'Sell Zone',
-        T1: 'First Target',
-        TAB: 'Turnaround Bar',
-        TB: 'Triple Bottom',
-        TC: 'Trend Check',
-        TL: 'Trendline',
-        'TL BoB': 'Trendline Break or Bounce',
-        TSH: 'TSL – Trailing Stop High / Trailing Stop Low',
-        TT: 'Triple Top',
-        VI: 'Value Index',
-        WVI: 'Weekly Value Index'
+        '1r': 'Target is 100% of Risk (distance from entry to stop)',
+        abs: 'Advanced Breakout System',
+        ae: 'Alternative Entry',
+        bac: 'Break and Close',
+        bd: 'Break Down',
+        be: 'Break Even',
+        bobcat: 'Break Out Bar Category (e.g 4 BoBCats)',
+        bob: 'Break Out Bar',
+        bo: 'B/o – Break Out',
+        bre: 'Bearish Engulfing',
+        brf: 'Bearish Flag',
+        brrpi: 'Bearish Range Percentage Indicator',
+        bue: 'Bullish Engulfing',
+        buf: 'Bullish Flag',
+        burpi: 'Bullish Range Percentage Indicator',
+        bw: 'Bollinger Bandwidth',
+        bz: 'Buy Zone',
+        c4h: 'Cat 4 High or Cat 4 Low',
+        c4l: 'Cat 4 High or Cat 4 Low',
+        cat: 'Category (e.g Cat 4)', // breaks
+        coe: 'Confluence of Events',
+        ct: 'Channel Tunnel',
+        cts: 'Collapsible Trailing Stop',
+        db: 'Double Bottom',
+        dd: 'Double Deviation',
+        dnt: 'Do Not Trade',
+        dma: 'Dual Moving Average',
+        dt: 'Double Top',
+        dvi: 'Daily Value Index',
+        ea: 'Entry Advantage',
+        emma: 'Exponential Multiple Moving Average',
+        eslt: 'Entry Stop Loss Technique',
+        ew: 'Elliott Waves',
+        facts: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
+        ft: 'Free Trade',
+        go: 'Gator Oscillator',
+        hh: 'Highest High (Donchian levels)',
+        ll: 'Lowest Low (Donchian levels)',
+        ib: 'Initial Breakout',
+        iw: 'Impulse Wave',
+        lhf: 'Low Hanging Fruit',
+        lt: 'Long Term',
+        mt: 'Medium Term',
+        oo: 'Obvious Opportunity: ',
+        'p&p': 'Price and Personaility', // no match
+        pb: 'Pullback',
+        'p/b': 'Pink Line', // span wrap breaks
+        pl: 'Pink Line',
+        'p/l': 'Pink Line', // span wrap breaks
+        poa: 'Plan of Action',
+        pp: 'Personal Preference',
+        pt: 'Pilot Trade',
+        pub: 'Pullback Bar',
+        rbo: 'Range Break Out',
+        rboa: 'Range Breakout Advanced',
+        rc: 'Reversal Candle',
+        rn: 'Round Number',
+        rf: 'Risk Free',
+        rpi: 'Range Percentage Indicator',
+        rr: 'R Ratio',
+        rst: 'Resistance, Support and Trendline',
+        rtc: 'Regression Trend Channel',
+        rz: 'Range Zone',
+        sd: 'Standard Deviation',
+        st: 'Short Term',
+        step: 'Stop to Entry Point',
+        sz: 'Sell Zone',
+        t1: 'First Target',
+        tab: 'Turnaround Bar',
+        tb: 'Triple Bottom',
+        tc: 'Trend Check',
+        tl: 'Trendline',
+        'tl bob': 'Trendline Break or Bounce',
+        tsh: 'Trailing Stop High',
+        tsl: 'Trailing Stop Low',
+        tt: 'Triple Top',
+        vi: 'Value Index',
+        wvi: 'Weekly Value Index'
     };
 
     function addListener() {
@@ -107,6 +113,7 @@
         $('span[data-qaid="message-text"]:not(.trc-matched)').each(function (index) {
             var match;
             var messageHtml = $(this).html();
+            var replacementHtml = messageHtml;
             var count = 0;
             // Test string for matches
             while (match = abbrs.exec(messageHtml)) {
@@ -121,21 +128,32 @@
                     match.index].join(''));
 
                 // Pass any matches to the replacement function
-                messageHtml = replacement(messageHtml, match);
+                replacementHtml = replacement(replacementHtml, match);
+
+                if(count > 1000) {
+                    console.error([
+                        'Something went wrong',
+                        ' matching: ',
+                        match,
+                        ', in: ',
+                        replacementHtml
+                    ].join(''));
+                    return;
+                }
             }
-            $(this).html(messageHtml).addClass('trc-matched');
+            $(this).html(replacementHtml).addClass('trc-matched');
         });
 
         // Node loop exit, rebind the DOMSubtreeModified listener
         addListener();
     }
 
-    function replacement(messageHtml, match) {
+    function replacement(replacementHtml, match) {
         var tooltipTxt = getTooltipText(match);
         var wrappedMatchPart = "<span class='match' title='" + tooltipTxt + "'>" + match[0] + "</span>";
         // Match pattern as a whole word only if it is not proceeded by a '</span>' tag
         var matchPattern = '\\b' + match[0] + '\\b(?!<\/span>)';
-        return messageHtml.replace(new RegExp(matchPattern, 'ig'), wrappedMatchPart);
+        return replacementHtml.replace(new RegExp(matchPattern, 'ig'), wrappedMatchPart);
     }
 
     function getTooltipText(match) {
@@ -154,7 +172,7 @@
 
     //--------- FOR DEVELOPMENT ONLY ----------
     if (!_.isEqual(location.hostname, 'www.yammer.com')) {
-        $('body').append('<h3>Tee hee</h3>');
+        $('body').append('<h3></h3>');
     }
     //-----------------------------------------
 
