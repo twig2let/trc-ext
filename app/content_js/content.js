@@ -10,11 +10,24 @@
 
     $('body').append("<style>.match {text-decoration:underline;color:#bfd730;cursor:pointer;}</style>");
 
-    var abbreviations = /(br|bu)?(rpi|dvi|wvi|sma|db|iw|pb|dma|ath|hfig|fig)/ig;
-
-    //var abbrLookup = {
-    //    dvi: ''
-    //};
+    var abbrs = /(br|bu)?(rpi|dvi|wvi|sma|db|iw|pb|dma|ath|hfig|fig)/ig;
+    var abbrsLookup = {
+        prefix: {
+            bu: 'Bullish',
+            br: 'Bearish'
+        },
+        rpi: 'Relative Price Indicator',
+        dvi: 'Daily Value Index',
+        wvi: 'Weekly Value Index',
+        sma: 'Simple Moving Average',
+        db: 'Double Bottom',
+        iw: 'Impulse Wave',
+        pb: 'Pullback',
+        dma: '???',
+        ath: 'All Time High',
+        hfig: 'Half Figure',
+        fig: 'The Figure'
+    };
 
     function addListener() {
         document.addEventListener("DOMSubtreeModified", findPatterns, false);
@@ -34,7 +47,7 @@
             var messageHtml = $(this).html();
             var count = 0;
             // Test string for matches
-            while (match = abbreviations.exec(messageHtml)) {
+            while (match = abbrs.exec(messageHtml)) {
                 console.info([
                     'Block ',
                     index,
@@ -56,13 +69,23 @@
     }
 
     function replacement(messageHtml, match) {
-        var wrappedMatchPart = "<span class='match' title='A tooltip'>" + match[0] + "</span>";
+        var tooltipTxt = getTooltipText(match);
+        var wrappedMatchPart = "<span class='match' title='" + tooltipTxt + "'>" + match[0] + "</span>";
         // Match pattern as a whole word only if it is not proceeded by a '</span>' tag
         var matchPattern = '\\b' + match[0] + '\\b(?!<\/span>)';
         return messageHtml.replace(new RegExp(matchPattern, 'ig'), wrappedMatchPart);
     }
 
-    function testForKnownPrefix(result) {
+    function getTooltipText(match) {
+        if (_.isUndefined(match[1])){
+            return abbrsLookup[match[0].toLowerCase()];
+        } else {
+            return [
+                abbrsLookup.prefix[match[1].toLowerCase()],
+                ' ',
+                abbrsLookup[match[2].toLowerCase()]
+            ].join('');
+        }
     }
 
     function insertAt(src, index, str) {
