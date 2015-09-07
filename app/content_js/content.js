@@ -34,7 +34,7 @@
         bz: 'Buy Zone',
         c4h: 'Cat 4 High or Cat 4 Low',
         c4l: 'Cat 4 High or Cat 4 Low',
-        cat: 'Category (e.g Cat 4)', // breaks
+        cat: 'Category (e.g Cat 4)',
         coe: 'Confluence of Events',
         ct: 'Channel Tunnel',
         cts: 'Collapsible Trailing Stop',
@@ -48,7 +48,7 @@
         emma: 'Exponential Multiple Moving Average',
         eslt: 'Entry Stop Loss Technique',
         ew: 'Elliott Waves',
-        facts: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels', // breaks
+        facts: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
         ft: 'Free Trade',
         go: 'Gator Oscillator',
         hh: 'Highest High (Donchian levels)',
@@ -61,7 +61,7 @@
         oo: 'Obvious Opportunity',
         'p&p': 'Price and Personaility', // no match
         pb: 'Pullback',
-        'p/b': 'Pink Line', // span wrap breaks
+        'p/b': 'Pullback', // span wrap breaks
         pl: 'Pink Line',
         'p/l': 'Pink Line', // span wrap breaks
         poa: 'Plan of Action',
@@ -95,7 +95,7 @@
         wvi: 'Weekly Value Index'
     };
 
-    var pattern = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|p&p|pb|pl|poa|pp|pt|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
+    var pattern = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|cat|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|p&p|pb|pl|poa|pp|pt|p\/l|p\/b|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
 
     XRegExp.install({
         // Overrides native regex methods with fixed/extended versions that support named
@@ -122,9 +122,11 @@
             var messageHtml = $(this).html();
             var replacementHtml = messageHtml;
             var count = 0;
+            var additionalCharacterCount = 0;
 
             XRegExp.forEach(messageHtml, pattern, function (xregObj) {
                 var match = xregObj[0];
+                var msg = messageHtml;
 
                 console.info([
                     'Block ',
@@ -146,37 +148,22 @@
                     ].join(''));
                     return;
                 }
-
                 var wrappedMatchPart = "<span class='match' title='" + getTooltipText(xregObj) + "'>" + match + "</span>";
-                replacementHtml = XRegExp.replace(replacementHtml, XRegExp.build('\\b' + match + '\\b(?!<\/span>)', 'ig'), wrappedMatchPart, 'all');
+
+                var splitPartForReplace = splitString(xregObj.input, xregObj.index);
+                var splitPartForKeeps = replacementHtml.substring(0, (xregObj.index + additionalCharacterCount));
+
+                console.info('splitPartForReplace: ', splitPartForReplace);
+                console.info('splitPartForKeeps: ', splitPartForKeeps);
+
+                var replacement = XRegExp.replace(splitPartForReplace, XRegExp.build('\\b' + match + '\\b(?!<\/span>)', ''), wrappedMatchPart, 'one');
+
+                replacementHtml = splitPartForKeeps.concat(replacement);
+                additionalCharacterCount = additionalCharacterCount + (wrappedMatchPart.length - match.length);
             });
 
-            //while (match = abbrs.exec(messageHtml)) {
-            //    console.info([
-            //        'Block ',
-            //        index,
-            //        ', Match Index:',
-            //        count++,
-            //        ' matched pattern: ',
-            //        match[0],
-            //        ', position: ',
-            //        match.index].join(''));
-            //
-            //    // Pass any matches to the replacement function
-            //    replacementHtml = replacement(replacementHtml, match);
-            //
-            //    if(count > 1000) {
-            //        console.error([
-            //            'Something went wrong',
-            //            ' matching: ',
-            //            match,
-            //            ', in: ',
-            //            replacementHtml
-            //        ].join(''));
-            //        return;
-            //    }
-            //}
             $(this).html(replacementHtml).addClass('trc-matched');
+            console.info(replacementHtml);
         });
 
         // Node loop exit, rebind the DOMSubtreeModified listener
@@ -195,6 +182,10 @@
         }
     }
 
+    function splitString(value, index) {
+        return value.substring(index);
+    }
+
     addListener();
 
     //--------- FOR DEVELOPMENT ONLY ----------
@@ -204,3 +195,5 @@
     //-----------------------------------------
 
 }());
+
+
