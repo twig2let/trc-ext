@@ -59,7 +59,7 @@
         lt: 'Long Term',
         mt: 'Medium Term',
         oo: 'Obvious Opportunity',
-        'p&p': 'Price and Personaility', // no match
+        'p&amp;p': 'Price and Personaility', // no match
         pb: 'Pullback',
         'p/b': 'Pullback', // span wrap breaks
         pl: 'Pink Line',
@@ -95,7 +95,7 @@
         wvi: 'Weekly Value Index'
     };
 
-    var pattern = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|cat|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|p&p|pb|pl|poa|pp|pt|p\/l|p\/b|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
+    var pattern = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|cat|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|p&amp;p|pb|pl|poa|pp|pt|p\/l|p\/b|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
 
     XRegExp.install({
         // Overrides native regex methods with fixed/extended versions that support named
