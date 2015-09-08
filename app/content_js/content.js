@@ -12,90 +12,90 @@
 
     var abbrsLookup = {
         prefix: {
-            bu: 'Bullish',
-            br: 'Bearish'
+            Bu: 'Bullish',
+            Br: 'Bearish'
         },
-        '1r': 'Target is 100% of Risk (distance from entry to stop)',
-        abs: 'Advanced Breakout System',
-        ae: 'Alternative Entry',
-        bac: 'Break and Close',
-        bd: 'Break Down',
-        be: 'Break Even',
-        bobcat: 'Break Out Bar Category (e.g 4 BoBCats)',
-        bob: 'Break Out Bar',
-        bo: 'B/o – Break Out',
-        bre: 'Bearish Engulfing',
-        brf: 'Bearish Flag',
-        brrpi: 'Bearish Range Percentage Indicator',
-        bue: 'Bullish Engulfing',
-        buf: 'Bullish Flag',
-        burpi: 'Bullish Range Percentage Indicator',
-        bw: 'Bollinger Bandwidth',
-        bz: 'Buy Zone',
-        c4h: 'Cat 4 High or Cat 4 Low',
-        c4l: 'Cat 4 High or Cat 4 Low',
-        cat: 'Category (e.g Cat 4)',
-        coe: 'Confluence of Events',
-        ct: 'Channel Tunnel',
-        cts: 'Collapsible Trailing Stop',
-        db: 'Double Bottom',
-        dd: 'Double Deviation',
-        dnt: 'Do Not Trade',
-        dma: 'Dual Moving Average',
-        dt: 'Double Top',
-        dvi: 'Daily Value Index',
-        ea: 'Entry Advantage',
-        emma: 'Exponential Multiple Moving Average',
-        eslt: 'Entry Stop Loss Technique',
-        ew: 'Elliott Waves',
-        facts: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
-        ft: 'Free Trade',
-        go: 'Gator Oscillator',
-        hh: 'Highest High (Donchian levels)',
-        ll: 'Lowest Low (Donchian levels)',
-        ib: 'Initial Breakout',
-        iw: 'Impulse Wave',
-        lhf: 'Low Hanging Fruit',
-        lt: 'Long Term',
-        mt: 'Medium Term',
-        oo: 'Obvious Opportunity',
-        'p&amp;p': 'Price and Personaility', // no match
-        pb: 'Pullback',
-        'p/b': 'Pullback', // span wrap breaks
-        pl: 'Pink Line',
-        'p/l': 'Pink Line', // span wrap breaks
-        poa: 'Plan of Action',
-        pp: 'Personal Preference',
-        pt: 'Pilot Trade',
-        pub: 'Pullback Bar',
-        rbo: 'Range Break Out',
-        rboa: 'Range Breakout Advanced',
-        rc: 'Reversal Candle',
-        rn: 'Round Number',
-        rf: 'Risk Free',
-        rpi: 'Range Percentage Indicator',
-        rr: 'R Ratio',
-        rst: 'Resistance, Support and Trendline',
-        rtc: 'Regression Trend Channel',
-        rz: 'Range Zone',
-        sd: 'Standard Deviation',
-        st: 'Short Term',
-        step: 'Stop to Entry Point',
-        sz: 'Sell Zone',
-        t1: 'First Target',
-        tab: 'Turnaround Bar',
-        tb: 'Triple Bottom',
-        tc: 'Trend Check',
-        tl: 'Trendline',
-        'tl bob': 'Trendline Break or Bounce',
-        tsh: 'Trailing Stop High',
-        tsl: 'Trailing Stop Low',
-        tt: 'Triple Top',
-        vi: 'Value Index',
-        wvi: 'Weekly Value Index'
+        '1R': 'Target is 100% of Risk (distance from entry to stop)',
+        ABS: 'Advanced Breakout System',
+        AE: 'Alternative Entry',
+        BaC: 'Break and Close',
+        BD: 'Break Down',
+        BE: 'Break Even',
+        BoBCAT: 'Break Out Bar Category (e.g 4 BoBCats)',
+        BoB: 'Break Out Bar',
+        BO: 'B/o – Break Out',
+        BrE: 'Bearish Engulfing',
+        BrF: 'Bearish Flag',
+        BRRPI: 'Bearish Range Percentage Indicator',
+        BuE: 'Bullish Engulfing',
+        BuF: 'Bullish Flag',
+        BURPI: 'Bullish Range Percentage Indicator',
+        BW: 'Bollinger Bandwidth',
+        BZ: 'Buy Zone',
+        C4H: 'Cat 4 High or Cat 4 Low',
+        C4L: 'Cat 4 High or Cat 4 Low',
+        CAT: 'Category (e.g Cat 4)',
+        CoE: 'Confluence of Events',
+        CT: 'Channel Tunnel',
+        CTS: 'Collapsible Trailing Stop',
+        DB: 'Double Bottom',
+        DD: 'Double Deviation',
+        DnT: 'Do Not Trade',
+        DMA: 'Dual Moving Average',
+        DT: 'Double Top',
+        DVI: 'Daily Value Index',
+        EA: 'Entry Advantage',
+        EMMA: 'Exponential Multiple Moving Average',
+        ESLT: 'Entry Stop Loss Technique',
+        EW: 'Elliott Waves',
+        FACTS: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
+        FT: 'Free Trade',
+        GO: 'Gator Oscillator',
+        HH: 'Highest High (Donchian levels)',
+        LL: 'Lowest Low (Donchian levels)',
+        IB: 'Initial Breakout',
+        IW: 'Impulse Wave',
+        LHF: 'Low Hanging Fruit',
+        LT: 'Long Term',
+        MT: 'Medium Term',
+        OO: 'Obvious Opportunity',
+        'P&amp;P': 'Price and Personaility', // no match
+        PB: 'Pullback',
+        'P/B': 'Pullback', // span wrap breaks
+        PL: 'Pink Line',
+        'P/L': 'Pink Line', // span wrap breaks
+        PoA: 'Plan of Action',
+        PP: 'Personal Preference',
+        PT: 'Pilot Trade',
+        PuB: 'Pullback Bar',
+        RBO: 'Range Break Out',
+        RBOA: 'Range Breakout Advanced',
+        RC: 'Reversal Candle',
+        RN: 'Round Number',
+        RF: 'Risk Free',
+        RPI: 'Range Percentage Indicator',
+        RR: 'R Ratio',
+        RST: 'Resistance, Support and Trendline',
+        RTC: 'Regression Trend Channel',
+        RZ: 'Range Zone',
+        SD: 'Standard Deviation',
+        ST: 'Short Term',
+        STEP: 'Stop to Entry Point',
+        SZ: 'Sell Zone',
+        T1: 'First Target',
+        TAB: 'Turnaround Bar',
+        TB: 'Triple Bottom',
+        TC: 'Trend Check',
+        TL: 'Trendline',
+        'TL BOB': 'Trendline Break or Bounce',
+        TSH: 'Trailing Stop High',
+        TSL: 'Trailing Stop Low',
+        TT: 'Triple Top',
+        VI: 'Value Index',
+        WVI: 'Weekly Value Index'
     };
 
-    var pattern = /\b(br|bu)?(1r|abs|ae|bac|bd|be|bobcat|bob|bo|bre|brf|brrpi|bue|buf|burpi|bw|bz|c4l|c4h|coe|ct|cts|cat|db|dd|dnt|dma|dt|dvi|ea|emma|eslt|ew|facts|ft|go|hh|ll|ib|iw|lhf|lt|mt|oo|p&amp;p|pb|pl|poa|pp|pt|p\/l|p\/b|pub|rbo|rboa|rc|rn|rf|rpi|rr|rst|rtc|rz|sd|st|step|sz|t1|tab|tb|tc|tl|tsh|tsl|tt|vi|wvi)\b/ig;
+    var pattern = /\b(Br|Bu)?(1R|ABS|AE|BaC|BD|BE|BoBCAT|BoB|BO|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|FT|GO|HH|LL|IB|IW|LHF|LT|MT|OO|P&amp;P|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RPI|RR|RST|RTC|RZ|SD|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)\b/g;
 
     XRegExp.install({
         // Overrides native regex methods with fixed/extended versions that support named
@@ -156,7 +156,7 @@
                 console.info('splitPartForReplace: ', splitPartForReplace);
                 console.info('splitPartForKeeps: ', splitPartForKeeps);
 
-                var replacement = XRegExp.replace(splitPartForReplace, XRegExp.build('\\b' + match + '\\b(?!<\/span>)', ''), wrappedMatchPart, 'one');
+                var replacement = XRegExp.replace(splitPartForReplace, XRegExp.build('\\b' + match + '\\b(?!<\/span>)', 'i'), wrappedMatchPart, 'one');
 
                 replacementHtml = splitPartForKeeps.concat(replacement);
                 additionalCharacterCount = additionalCharacterCount + (wrappedMatchPart.length - match.length);
@@ -172,12 +172,12 @@
 
     function getTooltipText(match) {
         if (_.isUndefined(match[1])) {
-            return abbrsLookup[match[0].toLowerCase()];
+            return abbrsLookup[match[0]];
         } else {
             return [
-                abbrsLookup.prefix[match[1].toLowerCase()],
+                abbrsLookup.prefix[match[1]],
                 ' ',
-                abbrsLookup[match[2].toLowerCase()]
+                abbrsLookup[match[2]]
             ].join('');
         }
     }
