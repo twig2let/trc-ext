@@ -1,4 +1,4 @@
-describe('Popup JS', function () {
+describe('Popup JS File', function () {
 
     afterEach(function () {
         chrome.tabs.sendMessage.reset();

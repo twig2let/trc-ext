@@ -1,4 +1,4 @@
-describe('Configuration Setup', function () {
+describe('Configuration Setup File', function () {
 
 
     afterEach(function () {
