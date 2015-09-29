@@ -6,7 +6,9 @@
 <body>
 
 <div id="mocha"></div>
-
+<div id="dirty" style="display: none;">
+    <button id="toggleAbbreviationsBtn">Toggle Abbrevs</button>
+</div>
 
 <script src="../node_modules/mocha/mocha.js"></script>
 <script src="../node_modules/chai/chai.js"></script>
@@ -19,17 +21,21 @@
 
 <!-- Libs -->
 <script src="../app/libs/underscore-1.8.3.min.js"></script>
+<script src="../app/libs/jquery-2.1.4.min.js"></script>
 
 <!-- Implementations -->
 <script src="../app/settings/defaultConfiguration.js"></script>
 <script src="../app/background_pages/configuration_setup.js"></script>
+<script src="../app/popup/popup.js"></script>
 
 <!-- Specs -->
 <script src="./configuration_setup.spec.js"></script>
+<script src="./popup.spec.js"></script>
 
 <script>
     mocha.checkLeaks();
-    mocha.globals(['jQuery']);
+    mocha.globals(['jQuery*']);
+
     mocha.run();
 </script>
 </body>
