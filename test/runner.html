@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>TRC-EXT Test Runner</title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css"/>
+</head>
+<body>
+
+<div id="mocha"></div>
+
+
+<script src="../node_modules/mocha/mocha.js"></script>
+<script src="../node_modules/chai/chai.js"></script>
+<script src="../node_modules/sinon/pkg/sinon.js"></script>
+<script src="../node_modules/sinon-chrome/chrome.js"></script>
+
+<script>
+    mocha.setup('bdd');
+</script>
+
+<!-- Libs -->
+<script src="../app/libs/underscore-1.8.3.min.js"></script>
+
+<!-- Implementations -->
+<script src="../app/settings/defaultConfiguration.js"></script>
+<script src="../app/background_pages/configuration_setup.js"></script>
+
+<!-- Specs -->
+<script src="./configuration_setup.spec.js"></script>
+
+<script>
+    mocha.checkLeaks();
+    mocha.globals(['jQuery']);
+    mocha.run();
+</script>
+</body>
+</html>

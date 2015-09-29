@@ -1,8 +1,6 @@
 var gulp = require('gulp');
-var gutil = require('gulp-util');
 var clean = require('gulp-clean');
 var flatten = require('gulp-flatten');
-var webpack = require('webpack');
 
 
 gulp.task('default', function () {
@@ -14,12 +12,13 @@ gulp.task('build', ['clean', 'copy']);
 var configuration = {
     context: __dirname + '/',
     output: {
-        path: __dirname + "/build",
+        path: __dirname + "/build"
     }
 };
 
 var paths = {
-    all: ['app/**/*.*']
+    all: ['app/**/*.*'],
+    test: ['test/**/*.spec.js']
 };
 
 // Delete the build directory

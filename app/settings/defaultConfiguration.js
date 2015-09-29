@@ -1,0 +1,3 @@
+var defaultConfiguration = {
+    abbrHighlighting: false
+};

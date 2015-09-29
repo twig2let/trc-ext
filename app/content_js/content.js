@@ -1,12 +1,50 @@
-/*ToDo:
- * Fix auto prefix recognition, int & Br,Bu etc?
- * Capture all the abbreviation data to construct regex
- * Create tooltip
- * Create popup options, e.g. toggle for abbreviation highlighting
- */
-
-
 (function () {
+
+    // Listen for to toggle event message
+    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+        if (_.isEqual(request.message, 'abbrHighlighting')) {
+            handleMessageEvt(request.message, sendResponse);
+        }
+    });
+
+    // Determine based on the config value if we're toggling on or off
+    function handleMessageEvt(key, sendRespnse) {
+        chrome.storage.sync.get('config', function (result) {
+
+            result.config[key] = !result.config[key];
+
+            if (result.config[key]) {
+                addDomListener();
+            } else {
+                removeDomListener();
+            }
+            updateConfig(result, sendRespnse);
+        });
+    }
+
+    // Update the key in the config
+    function updateConfig(result, sendRespnse) {
+        chrome.storage.sync.set({'config': result.config}, function (config) {
+            sendRespnse(config);
+        });
+    }
+
+    // Add the DOM listeners so we can respond to new content
+    function addDomListener() {
+        console.info('dom listener added');
+        document.addEventListener("DOMSubtreeModified", findPatterns, false);
+    }
+
+    // Remove the DOM listeners so we are not pattern matching if we don't need to
+    function removeDomListener() {
+        console.info('dom listener removed');
+        document.removeEventListener("DOMSubtreeModified", findPatterns, false);
+    }
+
+    function findPatterns() {
+
+    }
+
 
     $('body').append("<style>.match {text-decoration:underline;color:#bfd730;cursor:pointer;}</style>");
 
@@ -95,7 +133,6 @@
         VI: 'Value Index',
         WVI: 'Weekly Value Index'
     };
-
     var pattern = /\b(Br|Bu)?(1R|ABS|AE|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|FT|GO|HH|LL|IB|IW|LHF|LT|MT|OO|P&amp;P|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RPI|RR|RST|RTC|RZ|SD|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)\b/g;
 
     XRegExp.install({
@@ -105,13 +142,7 @@
     });
 
 
-    function addListener() {
-        document.addEventListener("DOMSubtreeModified", findPatterns, false);
-    }
 
-    function removeListener() {
-        document.removeEventListener("DOMSubtreeModified", findPatterns, false);
-    }
 
     function findPatterns() {
         // Prevent infinite loop, find patterns results in a DOMSubtreeModified event
@@ -196,5 +227,3 @@
     //-----------------------------------------
 
 }());
-
-

@@ -2,6 +2,19 @@
   "manifest_version": 2,
   "name": "TRC Extension",
   "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Show options menu",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": ["underscore-1.8.3.min.js", "defaultConfiguration.js", "configuration_setup.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "matches": ["*://www.yammer.com/*"],
