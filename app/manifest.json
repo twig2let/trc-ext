@@ -12,18 +12,22 @@
     "storage"
   ],
   "background": {
-    "scripts": ["underscore-1.8.3.min.js", "defaultConfiguration.js", "configuration_setup.js"],
+    "scripts": [
+      "underscore-1.8.3.min.js",
+      "defaultConfiguration.js",
+      "configuration_setup.js"
+    ],
     "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["*://www.yammer.com/*"],
-      "js":[
+      "js": [
         "xregexp-2.0.min.js",
         "xregexp-build-0.1.0.js",
         "jquery-2.1.4.min.js",
         "underscore-1.8.3.min.js",
-        "content.js"
+        "abbreviation_highlighting.js"
       ],
       "run_at": "document_idle"
     }
