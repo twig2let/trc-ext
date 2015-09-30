@@ -39,11 +39,9 @@ var abbrHighlighting = (function () {
     }
 
     function matchPatterns(node) {
-
+        console.info(node.target.innerHTML);
     }
 
-
-    //$('body').append("<style>.match {text-decoration:underline;color:#bfd730;cursor:pointer;}</style>");
     //var abbrsLookup = {
     //    prefix: {
     //        Bu: 'Bullish',
@@ -136,9 +134,6 @@ var abbrHighlighting = (function () {
     //    // backreferences and fix numerous cross-browser bugs
     //    natives: true
     //});
-    //
-    //
-    //
     //
     //function findPatterns() {
     //    // Prevent infinite loop, find patterns results in a DOMSubtreeModified event

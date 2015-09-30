@@ -10,9 +10,6 @@
 <!-- ToDo: Move this to a fixture -->
 <div id="dirty" style="display: none;">
     <button id="toggleAbbreviationsBtn">Toggle Abbrevs</button>
-    <div class="yj-feed-messages">
-
-    </div>
 </div>
 
 <script src="../node_modules/mocha/mocha.js"></script>
@@ -30,11 +27,15 @@
 <script src="../app/libs/jquery-2.1.4.min.js"></script>
 <script src="../app/libs/xregexp-2.0.min.js"></script>
 
+<!-- Fixtures -->
+<script src="../test/yammer_test_messages.js"></script>
+
 <!-- Implementations -->
 <script src="../app/settings/defaultConfiguration.js"></script>
 <script src="../app/background_pages/configuration_setup.js"></script>
 <script src="../app/popup/popup.js"></script>
 <script src="../app/content_js/abbreviation_highlighting.js"></script>
+
 
 <!-- Specs -->
 <script src="./configuration_setup.spec.js"></script>

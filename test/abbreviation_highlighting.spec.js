@@ -2,7 +2,7 @@ describe('Abbreviation Highlighting File', function () {
 
     var triggerMutationObserver = function() {
         var $el = $('.yj-feed-messages').get(0);
-        $el.appendChild(document.createElement('p'));
+        $el.appendChild(document.createElement('script'));
     };
 
     beforeEach(function () {
@@ -45,6 +45,18 @@ describe('Abbreviation Highlighting File', function () {
                 chai.assert.deepEqual(actualConfig, expectedConfig, 'Observer config was incorrect');
 
                 MutationObserver.restore();
+            });
+
+            it('should trigger a pattern match', function () {
+                var mockMessage = {
+                    messageId: 'trc_abbreviations',
+                    value: true
+                };
+
+                chrome.runtime.onMessage.trigger(mockMessage);
+
+                //triggerMutationObserver();
+
             });
         });
 
