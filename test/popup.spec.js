@@ -19,7 +19,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();
@@ -45,7 +45,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();
@@ -71,7 +71,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();
@@ -91,7 +91,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();
@@ -117,7 +117,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();
@@ -142,7 +142,7 @@ describe('Popup JS File', function () {
                     }];
                     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
-                    chrome.storage.sync.get.yields(config);
+                    chrome.storage.sync.get.yields({config:config});
                     chrome.tabs.query.yields(mockTabs);
 
                     $toggleAbbreviationsBtn.click();

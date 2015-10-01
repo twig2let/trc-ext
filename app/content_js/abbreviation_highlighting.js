@@ -26,7 +26,9 @@ var abbrHighlighting = (function () {
 
         if (_.isUndefined(observer)) {
             observer = new MutationObserver(function (mutations) {
-                mutations.forEach(matchPatterns);
+                mutations.forEach(function (mutation) {
+                    matchPatterns(mutation.target.innerHTML);
+                });
             });
         }
 
@@ -38,8 +40,8 @@ var abbrHighlighting = (function () {
         observer.observe(observerTarget, config);
     }
 
-    function matchPatterns(node) {
-        console.info(node.target.innerHTML);
+    function matchPatterns(html) {
+        console.info('Mutation innerHTML: ', html);
     }
 
     //var abbrsLookup = {
