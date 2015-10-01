@@ -1,9 +1,16 @@
 var abbrHighlighting = (function () {
 
     var messageId = 'trc_abbreviations';
-    var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(matchPatterns);
+    var observer = new MutationObserver(matchPatterns);
+    console.log($('.yj-list-container'));
+    connectMutationObserver();
+    console.info('Instantiated Mutation Observer');
+
+    console.info('Asking if we should connect observer or not?');
+    chrome.runtime.sendMessage({abbreviation_highlighting_init: true}, function(response) {
+        console.info(response);
     });
+
 
     chrome.runtime.onMessage.addListener(function (request) {
         if (_.isEqual(request.messageId, messageId)) {
@@ -13,7 +20,7 @@ var abbrHighlighting = (function () {
 
     function handleMessage(messageVal) {
         if (messageVal) {
-            createMutationObserver();
+            connectMutationObserver();
         } else {
             disconnectMutationObserver();
         }
@@ -21,26 +28,35 @@ var abbrHighlighting = (function () {
 
     function disconnectMutationObserver() {
         observer.disconnect();
+        console.info('Disconnected Mutation Observer');
     }
 
-    function createMutationObserver() {
+    function connectMutationObserver() {
 
         var config = {
             childList: true,
-            characterData: true
+            characterData: true,
+            attributes: ['message-text']
         };
 
         var observerTarget = $('.yj-feed-messages').get(0);
         observer.observe(observerTarget, config);
+        console.info('Connected Mutation Observer');
     }
 
-    function matchPatterns(mutation) {
-        mutation.target.innerHTML = mutation.target.innerHTML + 'hello, Jonathan Morgan';
+    function matchPatterns(mutations) {
+        disconnectMutationObserver();
+        _.each(mutations, function (mutation) {
+            _.each(mutation.addedNodes, function (node) {
+                node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
+            });
+        });
+        console.info('Matching Patterns');
+        connectMutationObserver();
     }
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
     if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {
-
         return {
             reset: function () {
                 observer = new MutationObserver(function (mutations) {
@@ -220,7 +236,6 @@ var abbrHighlighting = (function () {
     //}
     //
     ////addListener();
-
 
 
 }());
