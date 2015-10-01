@@ -6,11 +6,9 @@ describe('Abbreviation Highlighting File', function () {
     };
 
     beforeEach(function () {
-
     });
 
     afterEach(function () {
-        abbrHighlighting.reset();
     });
 
     describe('When popup sends a message', function () {
@@ -26,6 +24,7 @@ describe('Abbreviation Highlighting File', function () {
                     disconnect: sinon.spy()
                 };
                 sinon.stub(window, 'MutationObserver').returns(mockObserver);
+                abbrHighlighting.reset(); // Call this here so we can reinstantiate the MutationObserver after its been mocked
 
                 var mockMessage = {
                     messageId: 'trc_abbreviations',
@@ -72,6 +71,8 @@ describe('Abbreviation Highlighting File', function () {
                     disconnect: sinon.spy()
                 };
                 sinon.stub(window, 'MutationObserver').returns(mockObserver);
+                abbrHighlighting.reset(); // Call this here so we can reinstantiate the MutationObserver after its been mocked
+
 
                 var mockMessage = {
                     messageId: 'trc_abbreviations',

@@ -1,8 +1,9 @@
 var abbrHighlighting = (function () {
 
     var messageId = 'trc_abbreviations';
-    var observer;
-    var observerTarget = $('.yj-feed-messages').get(0);
+    var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(matchPatterns);
+    });
 
     chrome.runtime.onMessage.addListener(function (request) {
         if (_.isEqual(request.messageId, messageId)) {
@@ -24,25 +25,32 @@ var abbrHighlighting = (function () {
 
     function createMutationObserver() {
 
-        if (_.isUndefined(observer)) {
-            observer = new MutationObserver(function (mutations) {
-                mutations.forEach(function (mutation) {
-                    matchPatterns(mutation.target.innerHTML);
-                });
-            });
-        }
-
         var config = {
             childList: true,
             characterData: true
         };
 
+        var observerTarget = $('.yj-feed-messages').get(0);
         observer.observe(observerTarget, config);
     }
 
-    function matchPatterns(html) {
-        console.info('Mutation innerHTML: ', html);
+    function matchPatterns(mutation) {
+        mutation.target.innerHTML = mutation.target.innerHTML + 'hello, Jonathan Morgan';
     }
+
+    //--------- FOR DEVELOPMENT TESTING ONLY ----------
+    if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {
+
+        return {
+            reset: function () {
+                observer = new MutationObserver(function (mutations) {
+                    mutations.forEach(matchPatterns);
+                });
+
+            }
+        }
+    }
+    //-----------------------------------------
 
     //var abbrsLookup = {
     //    prefix: {
@@ -213,14 +221,6 @@ var abbrHighlighting = (function () {
     //
     ////addListener();
 
-    //--------- FOR DEVELOPMENT TESTING ONLY ----------
-    if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {
-        return {
-            reset: function () {
-                observer = undefined;
-            }
-        }
-    }
-    //-----------------------------------------
+
 
 }());
