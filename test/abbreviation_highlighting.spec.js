@@ -36,6 +36,7 @@ describe('Abbreviation Highlighting File', function () {
                 var expectedCallCount = 1;
                 var actualConfig = mockObserver.observe.args[0][1];
                 var expectedConfig = {
+                    attributes: ['message-text'],
                     childList: true,
                     characterData: true
                 };
@@ -54,7 +55,7 @@ describe('Abbreviation Highlighting File', function () {
 
                 chrome.runtime.onMessage.trigger(mockMessage);
 
-                //triggerMutationObserver();
+                triggerMutationObserver();
 
             });
         });

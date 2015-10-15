@@ -1,13 +1,13 @@
 var gulp = require('gulp');
-var clean = require('gulp-clean');
+var seq = require('gulp-sequence');
+var del = require('del');
 var flatten = require('gulp-flatten');
 
 
 gulp.task('default', function () {
-    // place code for your default task here
 });
 
-gulp.task('build', ['clean', 'copy']);
+gulp.task('build', seq('clean', 'copy'));
 
 var configuration = {
     context: __dirname + '/',
@@ -23,8 +23,7 @@ var paths = {
 
 // Delete the build directory
 gulp.task('clean', function () {
-    return gulp.src(configuration.output.path)
-        .pipe(clean());
+    return del(configuration.output.path);
 });
 
 // Copy all other files to dist directly

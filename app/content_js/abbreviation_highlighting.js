@@ -1,13 +1,14 @@
 var abbrHighlighting = (function () {
 
     var messageId = 'trc_abbreviations';
-    var observer = new MutationObserver(matchPatterns);
+    var observer = null;
     console.log($('.yj-list-container'));
-    connectMutationObserver();
-    console.info('Instantiated Mutation Observer');
 
+    connectMutationObserver();
+
+    console.info('Instantiated Mutation Observer');
     console.info('Asking if we should connect observer or not?');
-    chrome.runtime.sendMessage({abbreviation_highlighting_init: true}, function(response) {
+    chrome.runtime.sendMessage({abbreviation_highlighting_init: true}, function (response) {
         console.info(response);
     });
 
@@ -32,6 +33,7 @@ var abbrHighlighting = (function () {
     }
 
     function connectMutationObserver() {
+        observer = new MutationObserver(matchPatterns);
 
         var config = {
             childList: true,
@@ -48,7 +50,7 @@ var abbrHighlighting = (function () {
         disconnectMutationObserver();
         _.each(mutations, function (mutation) {
             _.each(mutation.addedNodes, function (node) {
-                node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
+                //node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
             });
         });
         console.info('Matching Patterns');
