@@ -1,3 +1,3 @@
 var defaultConfiguration = {
-    abbrHighlighting: false
+    ABBREVIATION_HIGHLIGHTING: false
 };

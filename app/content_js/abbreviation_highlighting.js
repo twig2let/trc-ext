@@ -1,61 +1,50 @@
 var abbrHighlighting = (function () {
 
-    var messageId = 'trc_abbreviations';
-    var observer = null;
-    console.log($('.yj-list-container'));
+    var observer = new MutationObserver(checkConfiguration);
+    var taskId = 'ABBREVIATION_HIGHLIGHTING';
 
-    connectMutationObserver();
-
-    console.info('Instantiated Mutation Observer');
-    console.info('Asking if we should connect observer or not?');
-    chrome.runtime.sendMessage({abbreviation_highlighting_init: true}, function (response) {
-        console.info(response);
-    });
+    testForMutationElement();
 
 
-    chrome.runtime.onMessage.addListener(function (request) {
-        if (_.isEqual(request.messageId, messageId)) {
-            handleMessage(request.value);
-        }
-    });
+    function testForMutationElement() {
+        var observerTarget = $('.yj-main-content').get(0);
 
-    function handleMessage(messageVal) {
-        if (messageVal) {
-            connectMutationObserver();
-        } else {
-            disconnectMutationObserver();
+        if (_.isUndefined(observerTarget)) {
+            var timer = setInterval(function () {
+
+            }, 1000);
         }
     }
 
     function disconnectMutationObserver() {
         observer.disconnect();
-        console.info('Disconnected Mutation Observer');
     }
 
     function connectMutationObserver() {
-        observer = new MutationObserver(matchPatterns);
-
         var config = {
-            childList: true,
-            characterData: true,
-            attributes: ['message-text']
+            childList: true
         };
 
-        var observerTarget = $('.yj-feed-messages').get(0);
+
         observer.observe(observerTarget, config);
-        console.info('Connected Mutation Observer');
     }
 
-    function matchPatterns(mutations) {
-        disconnectMutationObserver();
-        _.each(mutations, function (mutation) {
-            _.each(mutation.addedNodes, function (node) {
-                //node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
-            });
+    function checkConfiguration(mutations) {
+        console.info(mutations);
+        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: taskId}, function (response) {
+            console.log(response);
         });
-        console.info('Matching Patterns');
-        connectMutationObserver();
     }
+
+    //function matchPatterns(mutations) {
+    //    disconnectMutationObserver();
+    //    _.each(mutations, function (mutation) {
+    //        _.each(mutation.addedNodes, function (node) {
+    //            node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
+    //        });
+    //    });
+    //    connectMutationObserver();
+    //}
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
     if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {

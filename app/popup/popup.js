@@ -3,8 +3,8 @@
     var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
 
     $toggleAbbreviationsBtn.on('click', function () {
-        var messageId = 'trc_abbreviations';
-        var configKey = 'abbrHighlighting';
+        var messageId = 'TRC_ABBREVIATIONS';
+        var configKey = 'ABBREVIATION_HIGHLIGHTING';
 
         chrome.storage.sync.get('config', function (storage) {
             var config = storage.config;

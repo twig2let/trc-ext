@@ -4,16 +4,17 @@ function checkConfiguration() {
     console.info('Checking ext configuration');
     chrome.storage.sync.get('config', function (config) {
         console.info('Configuration is: ', config);
-        if (_.isEmpty(config)) {
-            console.info('No existing configuration found.');
+        //if (_.isEmpty(config)) {
+        //    console.info('No existing configuration found.');
             setDefaultConfig();
-        }
+        //}
     });
 }
 
 function setDefaultConfig() {
+    //ToDo: Move this to json
     var defaultConfig = {
-        abbrHighlighting: false
+        ABBREVIATION_HIGHLIGHTING: false
     };
 
     console.info('Setting default configuration: ', defaultConfig);
