@@ -1,6 +1,5 @@
 describe('Configuration Setup File', function () {
 
-
     afterEach(function () {
         chrome.storage.sync.clear();
         chrome.storage.sync.set.reset();
@@ -11,7 +10,7 @@ describe('Configuration Setup File', function () {
         describe('if there is no existing config', function () {
             it('should set a default configuration', function () {
                 chrome.storage.sync.get.yields({}); // Chrome API returns empty object if no value exists
-                chrome.storage.sync.set.yields(defaultConfiguration); // Included globally
+                chrome.storage.sync.set.yields(defaultConfiguration); // Included globally via the setting JS
                 chrome.runtime.onInstalled.trigger();
 
                 var expectCallCount = 1;

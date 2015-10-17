@@ -1,38 +1,48 @@
 var abbrHighlighting = (function () {
 
     var observer = new MutationObserver(checkConfiguration);
+    var INTERVAL_DURATION = 1000;
     var taskId = 'ABBREVIATION_HIGHLIGHTING';
 
     testForMutationElement();
 
-
     function testForMutationElement() {
-        var observerTarget = $('.yj-main-content').get(0);
+        var observerTarget = $("ul[data-qaid='feed']").get(0);
 
         if (_.isUndefined(observerTarget)) {
-            var timer = setInterval(function () {
-
-            }, 1000);
+            startTimerForElement();
+        } else {
+            connectMutationObserver(observerTarget);
         }
+    }
+
+    function startTimerForElement() {
+        var timer = setInterval(function () {
+            var observerTarget = $("ul[data-qaid='feed']").get(0);
+            if (_.isObject(observerTarget)) {
+                clearTimeout(timer);
+                connectMutationObserver(observerTarget);
+            }
+        }, INTERVAL_DURATION);
     }
 
     function disconnectMutationObserver() {
         observer.disconnect();
     }
 
-    function connectMutationObserver() {
+    function connectMutationObserver(observerTarget) {
         var config = {
             childList: true
         };
-
 
         observer.observe(observerTarget, config);
     }
 
     function checkConfiguration(mutations) {
         console.info(mutations);
-        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: taskId}, function (response) {
-            console.log(response);
+        disconnectMutationObserver();
+        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: taskId}, function (state) {
+            console.info('Abbreviation config state: ', state);
         });
     }
 
