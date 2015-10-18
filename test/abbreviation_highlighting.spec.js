@@ -37,7 +37,8 @@ describe('Abbreviation Highlighting File', function () {
                 var expectedCallCount = 1;
                 var actualConfig = mockObserver.observe.args[0][1];
                 var expectedConfig = {
-                    childList: true
+                    childList: true,
+                    subtree: true
                 };
 
                 chai.assert.strictEqual(mockObserver.observe.callCount, expectedCallCount);
@@ -63,7 +64,8 @@ describe('Abbreviation Highlighting File', function () {
                 var expectedCallCount = 1;
                 var actualConfig = mockObserver.observe.args[0][1];
                 var expectedConfig = {
-                    childList: true
+                    childList: true,
+                    subtree: true
                 };
 
                 chai.assert.strictEqual(mockObserver.observe.callCount, expectedCallCount);
@@ -124,7 +126,8 @@ describe('Abbreviation Highlighting File', function () {
 
             var actualConfig = mockObserver.observe.args[0][1];
             var expectedConfig = {
-                childList: true
+                childList: true,
+                subtree: true
             };
 
             chai.assert.isTrue(mockObserver.observe.calledOnce);
