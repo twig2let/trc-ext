@@ -1,5 +1,9 @@
 describe('Popup JS File', function () {
 
+
+    beforeEach(function(){
+    });
+
     afterEach(function () {
         chrome.tabs.sendMessage.reset();
         chrome.storage.sync.set.reset();

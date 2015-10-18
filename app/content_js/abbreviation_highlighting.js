@@ -1,27 +1,28 @@
 var abbrHighlighting = (function () {
 
-    var observer = new MutationObserver(checkConfiguration);
     var INTERVAL_DURATION = 1000;
-    var taskId = 'ABBREVIATION_HIGHLIGHTING';
+    var TASK_ID = 'ABBREVIATION_HIGHLIGHTING';
+    var observer = new MutationObserver(checkConfiguration);
 
-    testForMutationElement();
+    testForMutationTarget();
 
-    function testForMutationElement() {
+    function testForMutationTarget() {
         var observerTarget = $("ul[data-qaid='feed']").get(0);
 
         if (_.isUndefined(observerTarget)) {
-            startTimerForElement();
+            startTimerForMutationTarget();
         } else {
-            connectMutationObserver(observerTarget);
+            connectMutationObserver();
         }
     }
 
-    function startTimerForElement() {
+    function startTimerForMutationTarget() {
         var timer = setInterval(function () {
+            console.info('testing for node');
             var observerTarget = $("ul[data-qaid='feed']").get(0);
             if (_.isObject(observerTarget)) {
-                clearTimeout(timer);
-                connectMutationObserver(observerTarget);
+                clearInterval(timer);
+                connectMutationObserver();
             }
         }, INTERVAL_DURATION);
     }
@@ -30,41 +31,32 @@ var abbrHighlighting = (function () {
         observer.disconnect();
     }
 
-    function connectMutationObserver(observerTarget) {
+    function connectMutationObserver() {
         var config = {
             childList: true
         };
-
+        var observerTarget = $("ul[data-qaid='feed']").get(0);
         observer.observe(observerTarget, config);
     }
 
     function checkConfiguration(mutations) {
         console.info(mutations);
         disconnectMutationObserver();
-        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: taskId}, function (state) {
+        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
             console.info('Abbreviation config state: ', state);
         });
+        connectMutationObserver();
     }
-
-    //function matchPatterns(mutations) {
-    //    disconnectMutationObserver();
-    //    _.each(mutations, function (mutation) {
-    //        _.each(mutation.addedNodes, function (node) {
-    //            node.innerHTML = node.innerHTML + 'hello, Jonathan Morgan';
-    //        });
-    //    });
-    //    connectMutationObserver();
-    //}
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
     if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {
         return {
             reset: function () {
-                observer = new MutationObserver(function (mutations) {
-                    mutations.forEach(matchPatterns);
-                });
+                observer = new MutationObserver(checkConfiguration);
 
-            }
+            },
+            testForMutationTarget: testForMutationTarget,
+            startTimerForMutationTarget: startTimerForMutationTarget
         }
     }
     //-----------------------------------------
