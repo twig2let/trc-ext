@@ -56,7 +56,8 @@ var abbrHighlighting = (function () {
 
             },
             testForMutationTarget: testForMutationTarget,
-            startTimerForMutationTarget: startTimerForMutationTarget
+            startTimerForMutationTarget: startTimerForMutationTarget,
+            checkConfiguration: checkConfiguration
         }
     }
     //-----------------------------------------

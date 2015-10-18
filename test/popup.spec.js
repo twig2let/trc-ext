@@ -5,7 +5,6 @@ describe('Popup JS File', function () {
     });
 
     afterEach(function () {
-        chrome.tabs.sendMessage.reset();
         chrome.storage.sync.set.reset();
         chrome.storage.sync.get.reset();
     });
