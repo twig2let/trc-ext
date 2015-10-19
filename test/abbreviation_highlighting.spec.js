@@ -5,12 +5,6 @@ describe('Abbreviation Highlighting File', function () {
         $('.sandbox ul').append($el);
     };
 
-    var appendMutationTargetToDom = function () {
-        var $ul = $('<ul></ul>');
-        $ul.attr('data-qaid', 'feed');
-        $('.sandbox').append($ul);
-    };
-
     var clock;
 
     beforeEach(function () {
@@ -31,7 +25,7 @@ describe('Abbreviation Highlighting File', function () {
                 };
                 sinon.stub(window, 'MutationObserver').returns(mockObserver);
                 abbrHighlighting.reset(); // Call this here so we can reinstantiate the MutationObserver after its been mocked
-                appendMutationTargetToDom();
+                TEST_MESSAGE_CONTENT.appendMutationTargetToDom();
                 abbrHighlighting.testForMutationTarget();
 
                 var expectedCallCount = 1;
@@ -58,7 +52,7 @@ describe('Abbreviation Highlighting File', function () {
                 abbrHighlighting.reset(); // Call this here so we can reinstantiate the MutationObserver after its been mocked
 
                 abbrHighlighting.testForMutationTarget();
-                appendMutationTargetToDom();
+                TEST_MESSAGE_CONTENT.appendMutationTargetToDom();
                 clock.tick(1000);
 
                 var expectedCallCount = 1;
@@ -136,4 +130,9 @@ describe('Abbreviation Highlighting File', function () {
             window.MutationObserver.restore();
         })
     });
+    describe('when the mutation observer is triggered and the configuration API returns true', function() {
+        it('should', function() {
+            var mutations = [];
+        })
+    })
 });
