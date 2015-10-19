@@ -54,10 +54,59 @@ var abbrHighlighting = (function () {
     function extractMessageNodes(mutations) {
         _.each(mutations, function (mutation) {
             var messageNodes = $(mutation.addedNodes).find('[data-qaid="message-text"]');
-            _.each(messageNodes, function (messageNode) {
-                $(messageNode).html('Allo Jeff, pleased to make your acquaintance.');
-            })
+            patternMatch(messageNodes);
         })
+    }
+
+    function patternMatch(messageNodes) {
+        _.each(messageNodes, function (messageNode) {
+            var html = $(messageNode).html();
+            var replacementHtml = _.clone(html);
+            var additionalCharacterCount = 0;
+
+            console.info('Un-matched HTML', html);
+
+            XRegExp.forEach(html, TRC_REGEX_SETTINGS.pattern, function (xregMatch) {
+                var matchedText = xregMatch[0];
+                var $spanWrappedMatch = createSpanWrap(xregMatch);
+
+                /**
+                 * We need to split the string as if any tooltip text
+                 * e.g. <span title="Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels">FACTS</span>
+                 * contains an abbreviation the regex will get a match and attempt to replace it!
+                 */
+
+                // This line removes all text behind the index of the match
+                var isolatedReplacementStr = splitString(xregMatch.input, xregMatch.index);
+                //console.info('splitPartForReplace: ', isolatedReplacementStr);
+                // This line removes all the text including and after the match, basically remove any text already pattern matched
+                var isolatedMutatedStr = splitString(replacementHtml, 0, (xregMatch.index + additionalCharacterCount));
+                //console.info('isolatedMutatedStr: ', isolatedMutatedStr);
+                // Make the replacement
+                var replacement = XRegExp.replace(isolatedReplacementStr, XRegExp.build('\\b' + matchedText + '\\b(?!<\/span>)', 'i'), $spanWrappedMatch, 'one');
+                //console.info('replacement: ', replacement);
+                // Concat the two strings back together
+                replacementHtml = isolatedMutatedStr.concat(replacement);
+                //console.info('Concatenated replacementHtml', replacementHtml);
+                // Store the length of text we have just added so we can split the string correctly on the next iteration
+                additionalCharacterCount = additionalCharacterCount + ($spanWrappedMatch.length - matchedText.length);
+            });
+            console.info('Matched HTML', replacementHtml);
+            $(messageNode).html(replacementHtml);
+        })
+    }
+
+    function createSpanWrap(xregMatch) {
+        // returns an object which cannot be interpolated
+        //var $el = $('<span>');
+        //$el.attr('title', TRC_REGEX_SETTINGS.getTooltipText(xregMatch));
+        //$el.text(xregMatch[0]);
+        //return $el.get(0);
+        return '<span class="trc-matched-abbrev" title="' + TRC_REGEX_SETTINGS.getTooltipText(xregMatch) + '">' + xregMatch[0] + '</span>';
+    }
+
+    function splitString(str, fromIndex, toIndex) {
+        return str.substring(fromIndex, toIndex);
     }
 
 
@@ -66,85 +115,13 @@ var abbrHighlighting = (function () {
         return {
             reset: function () {
                 observer = new MutationObserver(checkConfiguration);
-
             },
             testForMutationTarget: testForMutationTarget,
             startTimerForMutationTarget: startTimerForMutationTarget,
-            checkConfiguration: checkConfiguration
+            checkConfiguration: checkConfiguration,
+            extractMessageNodes: extractMessageNodes
         }
     }
     //------------------------------------------------
-
-
-    //function findPatterns() {
-    //    // Loop all the relevant text nodes
-    //    $('span[data-qaid="message-text"]:not(.trc-matched)').each(function (index) {
-    //        var match;
-    //        var messageHtml = $(this).html();
-    //        var replacementHtml = messageHtml;
-    //        var count = 0;
-    //        var additionalCharacterCount = 0;
-    //
-    //        XRegExp.forEach(messageHtml, pattern, function (xregObj) {
-    //            var match = xregObj[0];
-    //            var msg = messageHtml;
-    //
-    //            console.info([
-    //                'Block ',
-    //                index,
-    //                ', Match Index:',
-    //                count++,
-    //                ' matched pattern: ',
-    //                match,
-    //                ', position: ',
-    //                xregObj.index].join(''));
-    //
-    //            if (count > 1000) {
-    //                console.error([
-    //                    'Something went wrong',
-    //                    ' matching: ',
-    //                    match,
-    //                    ', in: ',
-    //                    replacementHtml
-    //                ].join(''));
-    //                return;
-    //            }
-    //            var wrappedMatchPart = "<span class='match' title='" + getTooltipText(xregObj) + "'>" + match + "</span>";
-    //
-    //            var splitPartForReplace = splitString(xregObj.input, xregObj.index);
-    //            var splitPartForKeeps = replacementHtml.substring(0, (xregObj.index + additionalCharacterCount));
-    //
-    //            console.info('splitPartForReplace: ', splitPartForReplace);
-    //            console.info('splitPartForKeeps: ', splitPartForKeeps);
-    //
-    //            var replacement = XRegExp.replace(splitPartForReplace, XRegExp.build('\\b' + match + '\\b(?!<\/span>)', 'i'), wrappedMatchPart, 'one');
-    //
-    //            replacementHtml = splitPartForKeeps.concat(replacement);
-    //            additionalCharacterCount = additionalCharacterCount + (wrappedMatchPart.length - match.length);
-    //        });
-    //
-    //        $(this).html(replacementHtml).addClass('trc-matched');
-    //        console.info(replacementHtml);
-    //    });
-    //
-    //    // Node loop exit, rebind the DOMSubtreeModified listener
-    //    addListener();
-    //}
-
-    //function getTooltipText(match) {
-    //    if (_.isUndefined(match[1])) {
-    //        return abbrsLookup[match[0]];
-    //    } else {
-    //        return [
-    //            abbrsLookup.prefix[match[1]],
-    //            ' ',
-    //            abbrsLookup[match[2]]
-    //        ].join('');
-    //    }
-    //}
-
-    //function splitString(value, index) {
-    //    return value.substring(index);
-    //}
 
 }());

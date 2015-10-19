@@ -130,9 +130,15 @@ describe('Abbreviation Highlighting File', function () {
             window.MutationObserver.restore();
         })
     });
-    describe('when the mutation observer is triggered and the configuration API returns true', function() {
-        it('should', function() {
-            var mutations = [];
+    describe('When extractMessageNodes is called with mutations', function() {
+        it('should begin pattern matching abbreviations', function() {
+            var mutationRecord = {
+                addedNodes: TEST_MESSAGE_CONTENT.getMessageHtml()
+            };
+            var mutations = [mutationRecord];
+            abbrHighlighting.extractMessageNodes(mutations);
+
+
         })
     })
 });

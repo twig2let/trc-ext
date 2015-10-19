@@ -26,6 +26,7 @@
       "matches": ["*://www.yammer.com/*"],
       "js": [
         "xregexp-2.0.min.js",
+        "xregexp-build-0.1.0.js",
         "jquery-2.1.4.min.js",
         "underscore-1.8.3.min.js",
         "regex_settings.js",
