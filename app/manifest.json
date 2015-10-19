@@ -24,6 +24,7 @@
   "content_scripts": [
     {
       "matches": ["*://www.yammer.com/*"],
+      "css": ["abbreviation_highlighting.css"],
       "js": [
         "xregexp-2.0.min.js",
         "xregexp-build-0.1.0.js",
