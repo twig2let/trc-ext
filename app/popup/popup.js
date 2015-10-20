@@ -1,6 +1,16 @@
 (function () {
 
-    var $toggleAbbreviationsBtn = $('#toggleAbbreviationsBtn');
+    var TASK_ID = 'ABBREVIATION_HIGHLIGHTING';
+    var $toggleAbbreviationsBtn = $('.toggle-abbreviations-btn');
+
+    setAbbreviationsBtnState();
+
+    function setAbbreviationsBtnState() {
+        var $input = $('.toggle-abbreviations-input');
+        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
+            $input.prop('checked', state);
+        });
+    }
 
     $toggleAbbreviationsBtn.on('click', function () {
         var configKey = 'ABBREVIATION_HIGHLIGHTING';

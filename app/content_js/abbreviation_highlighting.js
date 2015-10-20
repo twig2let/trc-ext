@@ -18,7 +18,6 @@ var abbrHighlighting = (function () {
 
     function startTimerForMutationTarget() {
         var timer = setInterval(function () {
-            console.info('testing for node');
             var observerTarget = $("ul[data-qaid='feed']").get(0);
             if (_.isObject(observerTarget)) {
                 clearInterval(timer);
@@ -43,7 +42,6 @@ var abbrHighlighting = (function () {
     function checkConfiguration(mutations) {
         disconnectMutationObserver();
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
-            console.info('Abbreviation config state: ', state);
             if (state) {
                 extractMessageNodes(mutations);
             }
@@ -64,14 +62,12 @@ var abbrHighlighting = (function () {
             var replacementHtml = _.clone(html);
             var additionalCharacterCount = 0;
 
-            console.info('Un-matched HTML', html);
-
             XRegExp.forEach(html, TRC_REGEX_SETTINGS.pattern, function (xregMatch) {
                 var matchedText = xregMatch[0];
                 var $spanWrappedMatch = createSpanWrap(xregMatch);
 
                 /**
-                 * We need to split the string as if any tooltip text
+                 * We need to split the string because if any tooltip text
                  * e.g. <span title="Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels">FACTS</span>
                  * contains an abbreviation the regex will get a match and attempt to replace it!
                  */
@@ -91,7 +87,6 @@ var abbrHighlighting = (function () {
                 // Store the length of text we have just added so we can split the string correctly on the next iteration
                 additionalCharacterCount = additionalCharacterCount + ($spanWrappedMatch.length - matchedText.length);
             });
-            console.info('Matched HTML', replacementHtml);
             $(messageNode).html(replacementHtml);
         })
     }
