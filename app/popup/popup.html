@@ -3,15 +3,24 @@
 <head>
     <title>TRC</title>
     <link href="base.css" rel="stylesheet" type="text/css">
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <link href="popup.css" rel="stylesheet" type="text/css">
+    <link href="toggle_switch.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container">
-    <div class="switch">
-        <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
-        <label for="cmn-toggle-4"></label>
+<div id="container">
+    <div class="settings">
+        <div class="row">
+            <div class="setting-name">
+               Toggle abbreviation highlighting:
+            </div>
+            <div class="switch">
+                <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
+                <label for="cmn-toggle-4"></label>
+            </div>
+        </div>
     </div>
 </div>
+
 
 <script src="jquery-2.1.4.min.js"></script>
 <script src="popup.js"></script>

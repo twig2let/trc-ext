@@ -1,0 +1,22 @@
+#container {
+    min-width: 400px;
+    font-family: 'arial';
+}
+
+.settings {
+    display: table;
+    width: 100%;
+}
+.settings .row {
+    display: table-row;
+}
+.settings .setting-name,
+.settings .switch {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+}
+.settings .setting-name {
+    width: 600px;
+    font-size: 20px;
+}
