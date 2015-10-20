@@ -18,6 +18,7 @@
             var config = storage.config;
             config[configKey] = !config[configKey];
             updateConfigSettings(config);
+            refreshThePage();
         });
     });
 
@@ -25,6 +26,13 @@
     function updateConfigSettings(config) {
         chrome.storage.sync.set({'config': config}, function () {
             console.info('New configuration: ', config);
+        });
+    }
+
+    function refreshThePage() {
+        chrome.tabs.getSelected(null, function(tab) {
+            var code = 'window.location.reload();';
+            chrome.tabs.executeScript(tab.id, {code: code});
         });
     }
 
