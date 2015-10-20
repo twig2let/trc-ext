@@ -1,0 +1,6 @@
+1. Add some more tests
+2. Create a comprehensive test suite for the regexp
+
+Nice to have:
+
+1. Look into a more elegant solution for the toggling, e.g. not reloading page (false)
