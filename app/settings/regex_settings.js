@@ -97,6 +97,7 @@ var TRC_REGEX_SETTINGS = (function () {
      * (Br|Bu)?     - Optionally match can start with Br or Bu
      * (s|[0-9]*?)  - Optionally match can end with an 's' (e.g. OOs) OR any number of digits 0-9 (e.g. ATR30)
      *
+     *  https://regex101.com/r/sO5xN8/4
      */
     var pattern = /\b(Br|Bu)?(1R|ABS|AE|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|FT|GO|HH|LL|IB|IW|LHF|LT|MT|OO|P&amp;P|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RPI|RR|RST|RTC|RZ|SD|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|[0-9]*?)\b/g;
 

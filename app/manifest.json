@@ -4,7 +4,7 @@
   "name": "TRC Extension",
   "version": "1.0",
   "browser_action": {
-    "default_icon": "icon.png",
+    "default_icon": "icon_16.png",
     "default_title": "Show options menu",
     "default_popup": "popup.html"
   },

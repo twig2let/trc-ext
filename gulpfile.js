@@ -1,7 +1,8 @@
 var gulp = require('gulp');
 var seq = require('gulp-sequence');
-var del = require('del');
 var flatten = require('gulp-flatten');
+var del = require('del');
+
 
 
 gulp.task('default', function () {
