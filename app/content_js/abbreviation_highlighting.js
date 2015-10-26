@@ -56,7 +56,7 @@ var abbrHighlighting = (function () {
         })
     }
 
-    function patternMatch(messageNodes) {
+    function  patternMatch(messageNodes) {
         _.each(messageNodes, function (messageNode) {
             var html = $(messageNode).html();
             var replacementHtml = _.clone(html);
@@ -113,8 +113,7 @@ var abbrHighlighting = (function () {
             },
             testForMutationTarget: testForMutationTarget,
             startTimerForMutationTarget: startTimerForMutationTarget,
-            checkConfiguration: checkConfiguration,
-            extractMessageNodes: extractMessageNodes
+            checkConfiguration: checkConfiguration
         }
     }
     //------------------------------------------------
