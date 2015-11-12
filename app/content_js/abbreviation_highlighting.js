@@ -106,14 +106,15 @@ var abbrHighlighting = (function () {
 
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
-    if (_.isEqual(location.hostname, 'localhost') || window.mochaPhantomJS) {
+    if (_.isEqual(location.hostname, 'localhost') || _.isEqual(location.hostname, '')|| window.mochaPhantomJS ) {
         return {
             reset: function () {
                 observer = new MutationObserver(checkConfiguration);
             },
             testForMutationTarget: testForMutationTarget,
             startTimerForMutationTarget: startTimerForMutationTarget,
-            checkConfiguration: checkConfiguration
+            checkConfiguration: checkConfiguration,
+            extractMessageNodes: extractMessageNodes
         }
     }
     //------------------------------------------------

@@ -9,6 +9,15 @@
 
 <div class="sandbox" style="display: none;">
     <button class="toggle-abbreviations-btn">Toggle Abbreviations</button>
+
+    <!-- Pattern Matching Nodes -->
+    <div class="pattern-match-br-prefix">
+        <ul>
+            <li class='mockMessageContainer' data-addedNode="true">
+
+            </li>
+        </ul>
+    </div>
 </div>
 
 <script src="../node_modules/mocha/mocha.js"></script>
@@ -40,6 +49,7 @@
 <script src="./configuration_setup.spec.js"></script>
 <script src="./popup.spec.js"></script>
 <script src="./abbreviation_highlighting.spec.js"></script>
+<script src="./regex_tester.spec.js"></script>
 
 <script>
     mocha.checkLeaks();
