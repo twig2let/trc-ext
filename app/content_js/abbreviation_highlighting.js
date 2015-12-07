@@ -53,7 +53,7 @@ var abbrHighlighting = (function () {
         _.each(mutations, function (mutation) {
             var messageNodes = $(mutation.addedNodes).find('[data-qaid="message-text"]');
             patternMatch(messageNodes);
-        })
+        });
     }
 
     function  patternMatch(messageNodes) {
@@ -88,7 +88,7 @@ var abbrHighlighting = (function () {
                 additionalCharacterCount = additionalCharacterCount + ($spanWrappedMatch.length - matchedText.length);
             });
             $(messageNode).html(replacementHtml);
-        })
+        });
     }
 
     function createSpanWrap(xregMatch) {
@@ -115,7 +115,7 @@ var abbrHighlighting = (function () {
             startTimerForMutationTarget: startTimerForMutationTarget,
             checkConfiguration: checkConfiguration,
             extractMessageNodes: extractMessageNodes
-        }
+        };
     }
     //------------------------------------------------
 

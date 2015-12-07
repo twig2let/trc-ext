@@ -1,5 +1,5 @@
 .trc-matched-abbrev {
     text-decoration: underline;
-    color: #bfd730;
+    font-weight: bold;
     cursor: help;
 }

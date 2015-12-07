@@ -7,11 +7,17 @@ var TRC_REGEX_SETTINGS = (function () {
     var map = {
         prefix: {
             Bu: 'Bullish',
-            Br: 'Bearish'
+            Br: 'Bearish',
+            d: 'Daily',
+            w: 'Weekly',
+            m: 'Monthly',
+            'w+d': 'Weekly and Daily'
         },
         '1R': 'Target is 100% of Risk (distance from entry to stop)',
         ABS: 'Advanced Breakout System',
         AE: 'Alternative Entry',
+        ATH: 'All Time High',
+        ATL: 'All time Low',
         BaC: 'Break and Close',
         BD: 'Break Down',
         BE: 'Break Even',
@@ -38,23 +44,29 @@ var TRC_REGEX_SETTINGS = (function () {
         DnT: 'Do Not Trade',
         DMA: 'Dual Moving Average',
         DT: 'Double Top',
-        DVI: 'Daily Value Index',
+        DVI: 'Daily Value Index / 200 Simple Moving Average (200SMA)',
         EA: 'Entry Advantage',
         EMMA: 'Exponential Multiple Moving Average',
         ESLT: 'Entry Stop Loss Technique',
         EW: 'Elliott Waves',
         FACTS: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
+        Fig: 'Figure',
         FT: 'Free Trade',
         GO: 'Gator Oscillator',
+        HFig: 'Half Figure',
         HH: 'Highest High (Donchian levels)',
         LL: 'Lowest Low (Donchian levels)',
         IB: 'Initial Breakout',
         IW: 'Impulse Wave',
         LHF: 'Low Hanging Fruit',
         LT: 'Long Term',
+        'C&amp;H': 'Cup and Handles',
+        MA: 'Moving Average',
         MT: 'Medium Term',
+        NFP: 'Nonfarm Payroll',
         OO: 'Obvious Opportunity',
-        'P&amp;P': 'Price and Personaility', // no match
+        'P&amp;P': 'Price and Personaility',
+        PA: 'Price Action',
         PB: 'Pullback',
         'P/B': 'Pullback', // span wrap breaks
         PL: 'Pink Line',
@@ -68,12 +80,14 @@ var TRC_REGEX_SETTINGS = (function () {
         RC: 'Reversal Candle',
         RN: 'Round Number',
         RF: 'Risk Free',
+        RoC: 'Rate of Change',
         RPI: 'Range Percentage Indicator',
         RR: 'R Ratio',
         RST: 'Resistance, Support and Trendline',
         RTC: 'Regression Trend Channel',
         RZ: 'Range Zone',
         SD: 'Standard Deviation',
+        SMA: 'Simple Moving Average',
         ST: 'Short Term',
         STEP: 'Stop to Entry Point',
         SZ: 'Sell Zone',
@@ -94,12 +108,19 @@ var TRC_REGEX_SETTINGS = (function () {
      *
      * @type {RegExp}
      *
-     * (Br|Bu)?     - Optionally match can start with Br or Bu
-     * (s|[0-9]*?)  - Optionally match can end with an 's' (e.g. OOs) OR any number of digits 0-9 (e.g. ATR30)
+     * Match Prefix: (Br|Bu|d\w\m|[0-9]{0,3})
+     *    - Optionally match Br, Bu, d, w, m
+     *    - Optionally match between one and three digits e.g. 1, 50, 200
+     *    - Optionally match w+d e.g. Weekly and Daily
+     *
+     * Match Suffix: (s|(\$?)[0-9]{0,3})
+     *    - Optionally match can end with an 's' (e.g. OOs)
+     *    - Optionally between one and three digits (e.g. ATR30)
+     *          - This integer match can be preceded by a '$' e.g. Fig$200
      *
      *  https://regex101.com/r/sO5xN8/4
      */
-    var pattern = /\b(Br|Bu)?(1R|ABS|AE|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|FT|GO|HH|LL|IB|IW|LHF|LT|MT|OO|P&amp;P|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RPI|RR|RST|RTC|RZ|SD|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|[0-9]*?)\b/g;
+    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d)?(1R|ABS|AE|ATL|ATH|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|HFig|HH|LL|IB|IW|LHF|LT|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|\$?[0-9]{0,3})?\b/g;
 
     function getTooltipText(xregMatch) {
         var matchHasPrefix = !_.isUndefined(xregMatch[0]);
@@ -118,7 +139,7 @@ var TRC_REGEX_SETTINGS = (function () {
         map: map,
         pattern: pattern,
         getTooltipText: getTooltipText
-    }
+    };
 
 }());
 
