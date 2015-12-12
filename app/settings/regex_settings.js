@@ -11,7 +11,8 @@ var TRC_REGEX_SETTINGS = (function () {
             d: 'Daily',
             w: 'Weekly',
             m: 'Monthly',
-            'w+d': 'Weekly and Daily'
+            'w+d': 'Weekly and Daily',
+            'm+w': 'Monthly and Weekly'
         },
         '1R': 'Target is 100% of Risk (distance from entry to stop)',
         ABS: 'Advanced Breakout System',
@@ -33,6 +34,7 @@ var TRC_REGEX_SETTINGS = (function () {
         BURPI: 'Bullish Range Percentage Indicator',
         BW: 'Bollinger Bandwidth',
         BZ: 'Buy Zone',
+        'C&amp;H': 'Cup and Handle',
         C4H: 'Cat 4 High or Cat 4 Low',
         C4L: 'Cat 4 High or Cat 4 Low',
         CAT: 'Category (e.g Cat 4)',
@@ -60,7 +62,6 @@ var TRC_REGEX_SETTINGS = (function () {
         IW: 'Impulse Wave',
         LHF: 'Low Hanging Fruit',
         LT: 'Long Term',
-        'C&amp;H': 'Cup and Handles',
         MA: 'Moving Average',
         MT: 'Medium Term',
         NFP: 'Nonfarm Payroll',
@@ -108,7 +109,7 @@ var TRC_REGEX_SETTINGS = (function () {
      *
      * @type {RegExp}
      *
-     * Match Prefix: (Br|Bu|d\w\m|[0-9]{0,3})
+     * Match Prefix: (Br|Bu|d|w|m|[0-9]{0,3})
      *    - Optionally match Br, Bu, d, w, m
      *    - Optionally match between one and three digits e.g. 1, 50, 200
      *    - Optionally match w+d e.g. Weekly and Daily
@@ -118,12 +119,21 @@ var TRC_REGEX_SETTINGS = (function () {
      *    - Optionally between one and three digits (e.g. ATR30)
      *          - This integer match can be preceded by a '$' e.g. Fig$200
      *
-     *  https://regex101.com/r/sO5xN8/4
+     *  https://regex101.com/r/sO5xN8/8
      */
-    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d)?(1R|ABS|AE|ATL|ATH|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|HFig|HH|LL|IB|IW|LHF|LT|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|\$?[0-9]{0,3})?\b/g;
+    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|HFig|HH|LL|IB|IW|LHF|LT|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|[0-9]{0,3})\b/g;
+
+    /**
+     *
+     * @param xregMatch
+     * @schema [
+     *  'FullMatch',
+     *  'nth Capture Group'...
+     * ]
+     */
 
     function getTooltipText(xregMatch) {
-        var matchHasPrefix = !_.isUndefined(xregMatch[0]);
+        var matchHasPrefix = !_.isUndefined(xregMatch[1]);
         if (matchHasPrefix) {
             return [
                 map.prefix[xregMatch[1]],

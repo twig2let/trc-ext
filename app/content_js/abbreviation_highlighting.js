@@ -41,6 +41,11 @@ var abbrHighlighting = (function () {
 
     function checkConfiguration(mutations) {
         disconnectMutationObserver();
+
+
+        //extractMessageNodes(mutations); // ToDo: REMOVE LINE!
+
+
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
             if (state) {
                 extractMessageNodes(mutations);
@@ -66,6 +71,10 @@ var abbrHighlighting = (function () {
                 var matchedText = xregMatch[0];
                 var $spanWrappedMatch = createSpanWrap(xregMatch);
 
+                if (_.contains(matchedText, '+')) {
+                    matchedText = matchedText.replace(/\+/, '\\+');
+                }
+
                 /**
                  * We need to split the string because if any tooltip text
                  * e.g. <span title="Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels">FACTS</span>
@@ -79,7 +88,7 @@ var abbrHighlighting = (function () {
                 var isolatedMutatedStr = splitString(replacementHtml, 0, (xregMatch.index + additionalCharacterCount));
                 //console.info('isolatedMutatedStr: ', isolatedMutatedStr);
                 // Make the replacement
-                var replacement = XRegExp.replace(isolatedReplacementStr, XRegExp.build('\\b' + matchedText + '\\b(?!<\/span>)', 'i'), $spanWrappedMatch, 'one');
+                var replacement = XRegExp.replace(isolatedReplacementStr, XRegExp.build('\\b' + matchedText + '\\b(?!<\/span>)'), $spanWrappedMatch, 'one');
                 //console.info('replacement: ', replacement);
                 // Concat the two strings back together
                 replacementHtml = isolatedMutatedStr.concat(replacement);
@@ -114,7 +123,13 @@ var abbrHighlighting = (function () {
             testForMutationTarget: testForMutationTarget,
             startTimerForMutationTarget: startTimerForMutationTarget,
             checkConfiguration: checkConfiguration,
-            extractMessageNodes: extractMessageNodes
+            extractMessageNodes: extractMessageNodes,
+            insertData: (function() {
+                setTimeout(function() {
+                    $("[data-qaid='feed']").load('./app/test.html');
+                },300);
+
+            }())
         };
     }
     //------------------------------------------------
