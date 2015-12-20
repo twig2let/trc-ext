@@ -19,13 +19,14 @@ var TRC_REGEX_SETTINGS = (function () {
         AE: 'Alternative Entry',
         ATH: 'All Time High',
         ATL: 'All time Low',
+        ATR: 'Average True Range',
         BaC: 'Break and Close',
         BD: 'Break Down',
         BE: 'Break Even',
         BoBCAT: 'Break Out Bar Category (e.g 4 BoBCats)',
         BoB: 'Break Out Bar',
-        BO: 'B/o - Break Out',
-        'B/o': 'B/o - Break Out',
+        BO: 'Break Out',
+        'B/o': 'Break Out',
         BrE: 'Bearish Engulfing',
         BrF: 'Bearish Flag',
         BRRPI: 'Bearish Range Percentage Indicator',
@@ -41,7 +42,9 @@ var TRC_REGEX_SETTINGS = (function () {
         CoE: 'Confluence of Events',
         CT: 'Channel Tunnel',
         CTS: 'Collapsible Trailing Stop',
+        Cor: 'Correlated to market index',
         DB: 'Double Bottom',
+        DCI: 'Directional Count Index',
         DD: 'Double Deviation',
         DnT: 'Do Not Trade',
         DMA: 'Dual Moving Average',
@@ -55,23 +58,26 @@ var TRC_REGEX_SETTINGS = (function () {
         Fig: 'Figure',
         FT: 'Free Trade',
         GO: 'Gator Oscillator',
+        'G&amp;G': 'Gap and Go',
         HFig: 'Half Figure',
         HH: 'Highest High (Donchian levels)',
+        'H&amp;S': 'Head and Shoulders',
         LL: 'Lowest Low (Donchian levels)',
         IB: 'Initial Breakout',
         IW: 'Impulse Wave',
         LHF: 'Low Hanging Fruit',
         LT: 'Long Term',
+        'M/W/D': 'Monthly, Weekly and Daily time frames',
         MA: 'Moving Average',
         MT: 'Medium Term',
         NFP: 'Nonfarm Payroll',
         OO: 'Obvious Opportunity',
-        'P&amp;P': 'Price and Personaility',
+        'P&amp;P': 'Price and Personality',
         PA: 'Price Action',
         PB: 'Pullback',
-        'P/B': 'Pullback', // span wrap breaks
+        'P/B': 'Pullback',
         PL: 'Pink Line',
-        'P/L': 'Pink Line', // span wrap breaks
+        'P/L': 'Pink Line',
         PoA: 'Plan of Action',
         PP: 'Personal Preference',
         PT: 'Pilot Trade',
@@ -101,6 +107,7 @@ var TRC_REGEX_SETTINGS = (function () {
         TSH: 'Trailing Stop High',
         TSL: 'Trailing Stop Low',
         TT: 'Triple Top',
+        UnCor: 'UnCorrelated to market index',
         VI: 'Value Index',
         WVI: 'Weekly Value Index'
     };
@@ -109,7 +116,7 @@ var TRC_REGEX_SETTINGS = (function () {
      *
      * @type {RegExp}
      *
-     * Match Prefix: (Br|Bu|d|w|m|[0-9]{0,3})
+     * Match Prefix: (Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)
      *    - Optionally match Br, Bu, d, w, m
      *    - Optionally match between one and three digits e.g. 1, 50, 200
      *    - Optionally match w+d e.g. Weekly and Daily
@@ -119,9 +126,9 @@ var TRC_REGEX_SETTINGS = (function () {
      *    - Optionally between one and three digits (e.g. ATR30)
      *          - This integer match can be preceded by a '$' e.g. Fig$200
      *
-     *  https://regex101.com/r/sO5xN8/8
+     *  https://regex101.com/r/sO5xN8/16
      */
-    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|CT|CTS|CAT|DB|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|HFig|HH|LL|IB|IW|LHF|LT|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|VI|WVI)(s|[0-9]{0,3})\b/g;
+    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|ATR|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|Cor|CT|CTS|CAT|DB|DCI|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|G&amp;G|HFig|HH|H&amp;S|LL|IB|IW|LHF|LT|M\/W\/D|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|UnCor|VI|WVI)(s|[0-9]{0,3})?\b/g;
 
     /**
      *

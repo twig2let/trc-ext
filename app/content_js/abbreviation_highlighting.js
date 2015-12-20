@@ -43,8 +43,7 @@ var abbrHighlighting = (function () {
         disconnectMutationObserver();
 
 
-        //extractMessageNodes(mutations); // ToDo: REMOVE LINE!
-
+        extractMessageNodes(mutations); // ToDo: REMOVE LINE!
 
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
             if (state) {
@@ -115,7 +114,7 @@ var abbrHighlighting = (function () {
 
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
-    if (_.isEqual(location.hostname, 'localhost') || _.isEqual(location.hostname, '')|| window.mochaPhantomJS ) {
+    if (_.isEqual(location.hostname, 'localhost') || _.isEqual(location.hostname, '')|| window.mochaPhantomJS) {
         return {
             reset: function () {
                 observer = new MutationObserver(checkConfiguration);
