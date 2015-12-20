@@ -125,7 +125,7 @@ var abbrHighlighting = (function () {
             extractMessageNodes: extractMessageNodes,
             insertData: (function() {
                 setTimeout(function() {
-                    $("[data-qaid='feed']").load('./app/test.html');
+                    $("[data-qaid='feed']").load('./test.html');
                 },300);
 
             }())
