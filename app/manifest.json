@@ -32,7 +32,19 @@
         "jquery-2.1.4.min.js",
         "underscore-1.8.3.min.js",
         "regex_settings.js",
-        "abbreviation_highlighting.js"
+        "abbreviation_highlighting_yammer.js"
+      ],
+      "run_at": "document_end"
+    }, {
+      "matches": ["*://www.facebook.com/groups/TDTPro/*"],
+      "css": ["abbreviation_highlighting.css"],
+      "js": [
+        "xregexp-2.0.min.js",
+        "xregexp-build-0.1.0.js",
+        "jquery-2.1.4.min.js",
+        "underscore-1.8.3.min.js",
+        "regex_settings.js",
+        "abbreviation_highlighting_facebook.js"
       ],
       "run_at": "document_end"
     }
