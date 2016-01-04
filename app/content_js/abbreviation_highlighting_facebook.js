@@ -1,48 +1,27 @@
 var abbrHighlighting = (function () {
 
-    var INTERVAL_DURATION = 1000;
     var TASK_ID = 'ABBREVIATION_HIGHLIGHTING';
+    var $OBSERVER_TARGET_NODE = $('#pagelet_group_mall').get(0);
     var observer = new MutationObserver(checkConfiguration);
 
-    testForMutationTarget();
-
-    function testForMutationTarget() {
-        var observerTarget = $("ul[data-qaid='feed']").get(0);
-
-        if (_.isUndefined(observerTarget)) {
-            startTimerForMutationTarget();
-        } else {
-            connectMutationObserver();
-        }
-    }
-
-    function startTimerForMutationTarget() {
-        var timer = setInterval(function () {
-            var observerTarget = $("ul[data-qaid='feed']").get(0);
-            if (_.isObject(observerTarget)) {
-                clearInterval(timer);
-                connectMutationObserver();
-            }
-        }, INTERVAL_DURATION);
-    }
+    connectMutationObserver();
+    // We do this to parse the comments that were rendered on the server
+    checkConfiguration([{addedNodes: $OBSERVER_TARGET_NODE}]);
 
     function disconnectMutationObserver() {
         observer.disconnect();
     }
 
     function connectMutationObserver() {
-        var config = {
+        var options = {
             childList: true,
             subtree: true
         };
-        var observerTarget = $("ul[data-qaid='feed']").get(0);
-        observer.observe(observerTarget, config);
+        observer.observe($OBSERVER_TARGET_NODE, options);
     }
 
     function checkConfiguration(mutations) {
         disconnectMutationObserver();
-
-
         //extractMessageNodes(mutations); // Comment in for testing
 
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
@@ -50,13 +29,21 @@ var abbrHighlighting = (function () {
                 extractMessageNodes(mutations);
             }
         });
+
         connectMutationObserver();
     }
 
     function extractMessageNodes(mutations) {
         _.each(mutations, function (mutation) {
-            var messageNodes = $(mutation.addedNodes).find('[data-qaid="message-text"]');
-            patternMatch(messageNodes);
+            if(!_.isEmpty($(mutation.addedNodes))) {
+                if($(mutation.target).hasClass('UFICommentBody')) {
+                    var messageNodes = $(mutation.addedNodes).find('span');
+                    patternMatch(messageNodes);
+                } else {
+                    var messageNodes = $(mutation.addedNodes).find('.userContent, .UFICommentBody span');
+                    patternMatch(messageNodes);
+                }
+            }
         });
     }
 
