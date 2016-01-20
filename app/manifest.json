@@ -46,7 +46,7 @@
         "regex_settings.js",
         "abbreviation_highlighting_facebook.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     }
   ]
 }

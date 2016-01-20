@@ -1,7 +1,7 @@
 var abbrHighlighting = (function () {
 
     var TASK_ID = 'ABBREVIATION_HIGHLIGHTING';
-    var $OBSERVER_TARGET_NODE = $('#pagelet_group_mall').get(0);
+    var $OBSERVER_TARGET_NODE = $('#globalContainer').get(0);
     var observer = new MutationObserver(checkConfiguration);
 
     connectMutationObserver();
@@ -23,7 +23,6 @@ var abbrHighlighting = (function () {
     function checkConfiguration(mutations) {
         disconnectMutationObserver();
         //extractMessageNodes(mutations); // Comment in for testing
-
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
             if (state) {
                 extractMessageNodes(mutations);
@@ -35,7 +34,7 @@ var abbrHighlighting = (function () {
 
     function extractMessageNodes(mutations) {
         _.each(mutations, function (mutation) {
-            if(!_.isEmpty($(mutation.addedNodes))) {
+            if($(mutation.addedNodes).length) {
                 if($(mutation.target).hasClass('UFICommentBody')) {
                     var messageNodes = $(mutation.addedNodes).find('span');
                     patternMatch(messageNodes);
@@ -49,6 +48,9 @@ var abbrHighlighting = (function () {
 
     function  patternMatch(messageNodes) {
         _.each(messageNodes, function (messageNode) {
+            if ($(messageNode).has('.trc-matched-abbrev').length) {
+                return;
+            }
             var html = $(messageNode).html();
             var replacementHtml = _.clone(html);
             var additionalCharacterCount = 0;
