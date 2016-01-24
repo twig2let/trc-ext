@@ -27,7 +27,9 @@ var TRC_REGEX_SETTINGS = (function () {
         BoB: 'Break Out Bar',
         BO: 'Break Out',
         'B/o': 'Break Out',
+        BuEC: 'Bullish Engulfing Candle',
         BrE: 'Bearish Engulfing',
+        BrEC: 'Bearish Engulfing Candle',
         BrF: 'Bearish Flag',
         BRRPI: 'Bearish Range Percentage Indicator',
         BuE: 'Bullish Engulfing',
@@ -51,22 +53,28 @@ var TRC_REGEX_SETTINGS = (function () {
         DT: 'Double Top',
         DVI: 'Daily Value Index / 200 Simple Moving Average (200SMA)',
         EA: 'Entry Advantage',
+        EC: 'Engulfing Candle',
         EMMA: 'Exponential Multiple Moving Average',
         ESLT: 'Entry Stop Loss Technique',
         EW: 'Elliott Waves',
         FACTS: 'Figure, VI, Chart / Candlestick pattern, Trend, Support / Resistance levels',
         Fig: 'Figure',
         FT: 'Free Trade',
+        GdBoB: 'Gap Down Breakout Bar',
         GO: 'Gator Oscillator',
         'G&amp;G': 'Gap and Go',
+        GuBoB: 'Gap Up Breakout Bar',
         HFig: 'Half Figure',
+        HF: 'Half Figure',
         HH: 'Highest High (Donchian levels)',
         'H&amp;S': 'Head and Shoulders',
+        HVol: 'Higher Volume',
         LL: 'Lowest Low (Donchian levels)',
         IB: 'Initial Breakout',
         IW: 'Impulse Wave',
         LHF: 'Low Hanging Fruit',
         LT: 'Long Term',
+        LVol: 'Lower Volume',
         'M/W/D': 'Monthly, Weekly and Daily time frames',
         'm/w/d': 'Monthly, Weekly and Daily time frames',
         MA: 'Moving Average',
@@ -86,6 +94,7 @@ var TRC_REGEX_SETTINGS = (function () {
         RBO: 'Range Break Out',
         RBOA: 'Range Breakout Advanced',
         RC: 'Reversal Candle',
+        RelS: 'Relative Strength Indicator',
         RN: 'Round Number',
         RF: 'Risk Free',
         RoC: 'Rate of Change',
@@ -93,10 +102,12 @@ var TRC_REGEX_SETTINGS = (function () {
         RR: 'R Ratio',
         RST: 'Resistance, Support and Trendline',
         RTC: 'Regression Trend Channel',
+        RtS: 'Resistance Turned Support',
         RZ: 'Range Zone',
         SD: 'Standard Deviation',
         SMA: 'Simple Moving Average',
         ST: 'Short Term',
+        StR: 'Support Turned Resistance',
         STEP: 'Stop to Entry Point',
         SZ: 'Sell Zone',
         T1: 'First Target',
@@ -129,7 +140,7 @@ var TRC_REGEX_SETTINGS = (function () {
      *
      *  https://regex101.com/r/sO5xN8/16
      */
-    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|ATR|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BrE|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|Cor|CT|CTS|CAT|DB|DCI|DD|DnT|DMA|DT|DVI|EA|EMMA|ESLT|EW|FACTS|Fig|FT|GO|G&amp;G|HFig|HH|H&amp;S|LL|IB|IW|LHF|LT|M\/W\/D|m\/w\/d|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RN|RF|RoC|RPI|RR|RST|RTC|RZ|SD|SMA|ST|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|UnCor|VI|WVI)(s|[0-9]{0,3})?\b/g;
+    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|ATR|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BuEC|BrE|BrEC|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|Cor|CT|CTS|CAT|DB|DCI|DD|DnT|DMA|DT|DVI|EA|EC|EMMA|ESLT|EW|FACTS|Fig|FT|GdBoB|GO|G&amp;G|GuBoB|HFig|HF|HH|H&amp;S|HVol|LL|IB|IW|LHF|LT|LVol|M\/W\/D|m\/w\/d|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RelS|RN|RF|RoC|RPI|RR|RST|RtS|RTC|RZ|SD|SMA|ST|StR|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|UnCor|VI|WVI)(s|[0-9]{0,3})?\b/g;
 
     /**
      *
