@@ -8,6 +8,7 @@ var abbrHighlighting = (function () {
     // We do this to parse the comments that were rendered on the server
     checkConfiguration([{addedNodes: $OBSERVER_TARGET_NODE}]);
 
+
     function disconnectMutationObserver() {
         observer.disconnect();
     }
@@ -23,19 +24,22 @@ var abbrHighlighting = (function () {
     function checkConfiguration(mutations) {
         disconnectMutationObserver();
         //extractMessageNodes(mutations); // Comment in for testing
-        chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
-            if (state) {
-                extractMessageNodes(mutations);
-            }
-        });
+
+        if (_.isEqual($('#pageTitle').text(), 'TDTPro')) {
+            chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
+                if (state) {
+                    extractMessageNodes(mutations);
+                }
+            });
+        }
 
         connectMutationObserver();
     }
 
     function extractMessageNodes(mutations) {
         _.each(mutations, function (mutation) {
-            if($(mutation.addedNodes).length) {
-                if($(mutation.target).hasClass('UFICommentBody')) {
+            if ($(mutation.addedNodes).length) {
+                if ($(mutation.target).hasClass('UFICommentBody')) {
                     var messageNodes = $(mutation.addedNodes).find('span');
                     patternMatch(messageNodes);
                 } else {
@@ -46,7 +50,7 @@ var abbrHighlighting = (function () {
         });
     }
 
-    function  patternMatch(messageNodes) {
+    function patternMatch(messageNodes) {
         _.each(messageNodes, function (messageNode) {
             if ($(messageNode).has('.trc-matched-abbrev').length) {
                 return;
@@ -103,7 +107,7 @@ var abbrHighlighting = (function () {
 
 
     //--------- FOR DEVELOPMENT TESTING ONLY ----------
-    if (_.isEqual(location.hostname, 'localhost') || _.isEqual(location.hostname, '')|| window.mochaPhantomJS) {
+    if (_.isEqual(location.hostname, 'localhost') || _.isEqual(location.hostname, '') || window.mochaPhantomJS) {
         return {
             reset: function () {
                 observer = new MutationObserver(checkConfiguration);
@@ -112,10 +116,10 @@ var abbrHighlighting = (function () {
             startTimerForMutationTarget: startTimerForMutationTarget,
             checkConfiguration: checkConfiguration,
             extractMessageNodes: extractMessageNodes,
-            insertData: (function() {
-                setTimeout(function() {
+            insertData: (function () {
+                setTimeout(function () {
                     $("[data-qaid='feed']").load('./test.html');
-                },300);
+                }, 300);
 
             }())
         };

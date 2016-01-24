@@ -36,7 +36,7 @@
       ],
       "run_at": "document_end"
     }, {
-      "matches": ["*://www.facebook.com/groups/TDTPro/*"],
+      "matches": ["*://www.facebook.com/*"],
       "css": ["abbreviation_highlighting.css"],
       "js": [
         "xregexp-2.0.min.js",
