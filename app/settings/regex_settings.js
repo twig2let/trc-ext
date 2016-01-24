@@ -26,7 +26,6 @@ var TRC_REGEX_SETTINGS = (function () {
         BoBCAT: 'Break Out Bar Category (e.g 4 BoBCats)',
         BoB: 'Break Out Bar',
         BO: 'Break Out',
-        'B/o': 'Break Out',
         BuEC: 'Bullish Engulfing Candle',
         BrE: 'Bearish Engulfing',
         BrEC: 'Bearish Engulfing Candle',
@@ -76,7 +75,6 @@ var TRC_REGEX_SETTINGS = (function () {
         LT: 'Long Term',
         LVol: 'Lower Volume',
         'M/W/D': 'Monthly, Weekly and Daily time frames',
-        'm/w/d': 'Monthly, Weekly and Daily time frames',
         MA: 'Moving Average',
         MT: 'Medium Term',
         NFP: 'Nonfarm Payroll',
@@ -84,9 +82,7 @@ var TRC_REGEX_SETTINGS = (function () {
         'P&amp;P': 'Price and Personality',
         PA: 'Price Action',
         PB: 'Pullback',
-        'P/B': 'Pullback',
         PL: 'Pink Line',
-        'P/L': 'Pink Line',
         PoA: 'Plan of Action',
         PP: 'Personal Preference',
         PT: 'Pilot Trade',
@@ -140,7 +136,7 @@ var TRC_REGEX_SETTINGS = (function () {
      *
      *  https://regex101.com/r/sO5xN8/16
      */
-    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|ATR|BaC|BD|BE|BoBCAT|BoB|BO|B\/o|BuEC|BrE|BrEC|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|Cor|CT|CTS|CAT|DB|DCI|DD|DnT|DMA|DT|DVI|EA|EC|EMMA|ESLT|EW|FACTS|Fig|FT|GdBoB|GO|G&amp;G|GuBoB|HFig|HF|HH|H&amp;S|HVol|LL|IB|IW|LHF|LT|LVol|M\/W\/D|m\/w\/d|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|P\/L|P\/B|PuB|RBO|RBOA|RC|RelS|RN|RF|RoC|RPI|RR|RST|RtS|RTC|RZ|SD|SMA|ST|StR|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|UnCor|VI|WVI)(s|[0-9]{0,3})?\b/g;
+    var pattern = /\b(Br|Bu|d|w|m|[0-9]{0,3}|w\+d|m\+w)?(1R|ABS|AE|ATL|ATH|ATR|BaC|BD|BE|BoBCAT|BoB|BO|BuEC|BrE|BrEC|BrF|BRRPI|BuE|BuF|BURPI|BW|BZ|C4L|C4H|C&amp;H|CoE|Cor|CT|CTS|CAT|DB|DCI|DD|DnT|DMA|DT|DVI|EA|EC|EMMA|ESLT|EW|FACTS|Fig|FT|GdBoB|GO|G&amp;G|GuBoB|HFig|HF|HH|H&amp;S|HVol|LL|IB|IW|LHF|LT|LVol|M\/W\/D|MA|MT|NFP|OO|P&amp;P|PA|PB|PL|PoA|PP|PT|PuB|RBO|RBOA|RC|RelS|RN|RF|RoC|RPI|RR|RST|RtS|RTC|RZ|SD|SMA|ST|StR|STEP|SZ|T1|TAB|TB|TC|TL|TSH|TSL|TT|UnCor|VI|WVI)(s|[0-9]{0,3})?\b/g;
 
     /**
      *
