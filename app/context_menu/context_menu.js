@@ -11,7 +11,10 @@ chrome.contextMenus.create({
 
 // A generic onclick callback function.
 function genericOnClick(info, tab) {
+    chrome.windows.create({
+        'url': 'window.html',
+        'type': 'detached_panel'
+    }, function(window) {
+    });
     console.log("info: " + info.linkUrl);
 }
-
-
