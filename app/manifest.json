@@ -11,16 +11,18 @@
   },
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "contextMenus"
   ],
   "background": {
     "scripts": [
       "underscore-1.8.3.min.js",
       "defaultConfiguration.js",
       "configuration_setup.js",
-      "configuration_api.js"
+      "configuration_api.js",
+      "context_menu.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "content_scripts": [
     {
