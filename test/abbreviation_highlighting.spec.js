@@ -24,7 +24,7 @@ describe('Abbreviation Highlighting File', function () {
                     disconnect: sinon.spy()
                 };
                 sinon.stub(window, 'MutationObserver').returns(mockObserver);
-                abbrHighlighting.reset(); // Call this here so we can reinstantiate the MutationObserver after its been mocked
+                abbrHighlighting.reset(); // Call this here so we can re-instantiate the MutationObserver after its been mocked
                 TEST_MESSAGE_CONTENT.appendMutationTargetToDom();
                 abbrHighlighting.testForMutationTarget();
 
