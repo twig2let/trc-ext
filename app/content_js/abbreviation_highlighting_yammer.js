@@ -44,7 +44,6 @@ var abbrHighlighting = (function () {
 
 
         //extractMessageNodes(mutations); // Comment in for testing
-
         chrome.runtime.sendMessage({messageType: 'GET_CONFIGURATION', taskId: TASK_ID}, function (state) {
             if (state) {
                 extractMessageNodes(mutations);

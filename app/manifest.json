@@ -12,7 +12,8 @@
   "permissions": [
     "activeTab",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "bookmarks"
   ],
   "background": {
     "scripts": [
@@ -46,9 +47,13 @@
         "jquery-2.1.4.min.js",
         "underscore-1.8.3.min.js",
         "regex_settings.js",
-        "abbreviation_highlighting_facebook.js"
+        "abbreviation_highlighting_facebook.js",
+        "bookmark_manager_dialogue.js"
       ],
       "run_at": "document_idle"
     }
+  ],
+  "web_accessible_resources": [
+    "bookmark_manager_dialogue.html"
   ]
 }
