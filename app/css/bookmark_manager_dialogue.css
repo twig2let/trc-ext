@@ -1,0 +1,9 @@
+#trcExt_bookmarkDialogue {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+
+    width: 250px;
+    height: 200px;
+    border: 5px solid green;
+}

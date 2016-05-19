@@ -18,13 +18,23 @@
     }
 
     function setupBookmarkManager(request) {
-        createDialogue()
-    }
-
-    function createDialogue() {
-        $.get(chrome.extension.getURL('/bookmark_manager_dialogue.html'), function(data) {
-             $($.parseHTML(data)).appendTo('body');
+        createDialogue().then(function($dialogue) {
+            createDirectoryTree(request.nodes, $dialogue);
         });
     }
 
+    function createDialogue() {
+        return $.get(chrome.extension.getURL('/bookmark_manager_dialogue.html'), function(data) {
+            return ($.parseHTML(data)[0]);
+        });
+    }
+
+    function createDirectoryTree(nodes, $dialogue) {
+        var el = ($.parseHTML($dialogue)[0]);
+        _.each(nodes, function(node) {
+            el.appendChild(document.createTextNode(node.title));
+        });
+
+        $('body').appendChild(el);
+    }
 }());

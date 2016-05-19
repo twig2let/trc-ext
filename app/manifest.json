@@ -3,7 +3,7 @@
   "author": "twig2let",
   "name": "TRC Extension",
   "short_name": "TRC-EXT",
-  "version": "1.0",
+  "version": "4.0",
   "browser_action": {
     "default_icon": "icon_16.png",
     "default_title": "Show options menu",
@@ -40,7 +40,10 @@
       "run_at": "document_end"
     }, {
       "matches": ["*://www.facebook.com/*"],
-      "css": ["abbreviation_highlighting.css"],
+      "css": [
+        "abbreviation_highlighting.css",
+        "bookmark_manager_dialogue.css"
+      ],
       "js": [
         "xregexp-2.0.min.js",
         "xregexp-build-0.1.0.js",
