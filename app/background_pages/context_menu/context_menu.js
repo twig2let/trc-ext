@@ -29,7 +29,7 @@
             sendMessage([]);
         } else {
             chrome.bookmarks.getSubTree(nodes[0].id, function(subTree) {
-                sendMessage(removeNonFolders(subTree[0]));
+                sendMessage(removeNonFolders({children:subTree[0]}));
             });
 
         }

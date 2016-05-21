@@ -57,6 +57,10 @@
     }
   ],
   "web_accessible_resources": [
-    "bookmark_manager_dialogue.html"
+    "bookmark_manager_dialogue.html",
+    "document.png",
+    "icon_16.png",
+    "toggle-small.png",
+    "toggle-small-expand.png"
   ]
 }
